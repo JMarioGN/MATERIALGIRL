@@ -9,7 +9,7 @@
 
 {{ HTML::ul($errors->all()) }}
 
-{{ Form::open(array('url' => 'productos')) }}
+{{ Form::open(array('url' => 'productos', 'enctype' => 'multipart/form-data')) }}
 
 <div class="row">
 
@@ -56,6 +56,12 @@
         {{ Form::radio('venta', 1, (Request::old('venta') == 1), ['id'=>'radioSi', 'class'=>'', 'required'=>true]) }} Sí <br>
         {{ Form::radio('venta', 0, (Request::old('venta') == 0), ['id'=>'radioNo', 'class'=>'', 'required'=>true]) }} No
     </div>
+
+    <div class="form-group col-md-4"> 
+        {{ Form::label('imagen', 'Imagen')}} <br> 
+        {{ Form::file('imagen', ['accept'=>"image/x-png,image/gif,image/jpeg"]) }} <br>
+    </div>
+    
 
 </div>
 

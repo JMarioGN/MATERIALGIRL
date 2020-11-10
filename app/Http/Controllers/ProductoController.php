@@ -25,6 +25,10 @@ class ProductoController extends Controller
     {
         $tablecProductos = cProducto::orderBy('nombre')->get()->pluck('nombre','id');
         return view('productos.create',[ 'tablecProductos' => $tablecProductos ]);
+        /*$combocategorias = cProducto::orderBy('nombre')->get()->pluck('nombre','id');
+        $combousuarios = UserEloquent::orderBy('name')->get()->pluck('name','id');
+        return view('productos.create',[ 'combocategorias' => $combocategorias, 'combousuarios' => $combousuarios ]);*/
+
     }
 
     public function store(Request $request)
@@ -48,6 +52,15 @@ class ProductoController extends Controller
         }
 
         $mProducto->save();
+
+        $file = $request->file('imagen');
+        if($file){
+            $imgNombreVirtual = $file->getClientOriginalName();
+            $imgNombreFisico = $mProducto->id.'-'.$imgNombreVirtual;\Storage::disk('local')->put($imgNombreFisico, \File::get($file));
+            $mProducto->imgNombreVirtual = $imgNombreVirtual;
+            $mProducto->imgNombreFisico = $imgNombreFisico;
+            $mProducto->save();
+        }
 
         // Regresa a lista de productos
         Session::flash('message', 'Producto creado!');
@@ -85,7 +98,17 @@ class ProductoController extends Controller
             $mProducto->activo = false;
         }
 
-        $mProducto->save();
+        $mProducto->save(); 
+
+        $file = $request->file('imagen'); 
+        if($file){ 
+            $imgNombreVirtual = $file->getClientOriginalName(); 
+            $imgNombreFisico = $mProducto->id.'-'.$imgNombreVirtual; \Storage::disk('local')->put($imgNombreFisico, \File::get($file)); 
+            $mProducto->imgNombreVirtual = $imgNombreVirtual; 
+            $mProducto->imgNombreFisico = $imgNombreFisico; 
+            $mProducto->save(); 
+        } 
+
 
         Session::flash('message', 'Producto actualizado!');
         return Redirect::to('productos');

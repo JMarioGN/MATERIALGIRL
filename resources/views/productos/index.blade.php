@@ -17,6 +17,7 @@
             <tr>
                 <td>
                     <a href="{{route('productos.show', $rowProducto->id)}}">{{$rowProducto->nombre}}</a>
+                    <img src="{{ asset('storage/'.$rowProducto->imgNombreFisico )}}" width="100%">
                 </td>
                 <td>{{$rowProducto->categoria_producto}}</td>
             </tr>

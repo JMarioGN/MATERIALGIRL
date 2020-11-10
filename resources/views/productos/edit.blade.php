@@ -7,7 +7,7 @@
 
 {{ HTML::ul($errors->all()) }}
 
-{{ Form::model( $modelo, array('route' => array('productos.update', $modelo->id), 'method' => 'PUT') ) }}
+{{ Form::model( $modelo, array('route' => array('productos.update', $modelo->id), 'method' => 'PUT', 'enctype' => 'multipart/form-data') ) }}
 
 
 <div class="row">
@@ -21,7 +21,7 @@
     <div class="form-group col-md-4">
         {{ Form::label('stock', 'Existencias') }}
         {{ Form::number('stock', Request::old('stock'), 
-           array('class' => 'form-control', 'required'=>true)) }}
+           array('class' => 'form-control', 'required'=>true, 'disabled'=>true)) }}
     </div>
 
     <div class="form-group col-md-4">
@@ -55,6 +55,17 @@
         {{ Form::radio('venta', 1, (Request::old('venta') ? (Request::old('venta') == 1) : ($modelo->venta == 1)  ) , array('id'=>'radioSi', 'class'=>'', 'required'=>true)) }} Sí <br>
         {{ Form::radio('venta', 0, (Request::old('venta') ? (Request::old('venta') == 0) : ($modelo->venta == 0) ), array('id'=>'radioNo', 'class'=>'', 'required'=>true)) }} No
     </div>
+
+    
+
+    <div class="form-group col-md-4"> 
+        {{ Form::label('imagen', 'Imagen')}} <br> 
+        {{ Form::file('imagen', ['accept'=>"image/x-png,image/gif,image/jpeg"]) }} <br>
+    </div> 
+    <div class="col-md-4"> 
+        <img src="{{ asset('storage/'.$modelo->imgNombreFisico )}}" width="100%">
+    </div> 
+
 
 </div>
 
