@@ -52,7 +52,16 @@ class cproductoController extends Controller
 
         $mcproducto->save();
 
-        Session::flash('message', 'Categoria de producto creada!');
+        $file = $request->file('imagen');
+        if($file){
+            $imgNombreVirtual = $file->getClientOriginalName();
+            $imgNombreFisico = $mcproducto->id.'-'.$imgNombreVirtual;\Storage::disk('local')->put($imgNombreFisico, \File::get($file));
+            $mcproducto->imgNombreVirtual = $imgNombreVirtual;
+            $mcproducto->imgNombreFisico = $imgNombreFisico;
+            $mcproducto->save();
+        }
+
+        Session::flash('message', '¡C A T E G O R I A - C R E A D A!');
         return Redirect::to('cproducto');
     }
 
@@ -103,7 +112,16 @@ class cproductoController extends Controller
 
         $mcproducto->save();
 
-        Session::flash('message', 'Categoria de producto actualizado!');
+        $file = $request->file('imagen');
+        if($file){
+            $imgNombreVirtual = $file->getClientOriginalName();
+            $imgNombreFisico = $mcproducto->id.'-'.$imgNombreVirtual;\Storage::disk('local')->put($imgNombreFisico, \File::get($file));
+            $mcproducto->imgNombreVirtual = $imgNombreVirtual;
+            $mcproducto->imgNombreFisico = $imgNombreFisico;
+            $mcproducto->save();
+        }
+
+        Session::flash('message', '¡C A T E G O R I A - A C T U A L I Z A D A!');
         return Redirect::to('cproducto');
     }
 

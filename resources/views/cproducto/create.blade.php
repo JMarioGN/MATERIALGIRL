@@ -7,7 +7,7 @@
 
 {{ HTML::ul($errors->all()) }}
 
-{{ Form::open(array('url' => 'cproducto')) }}
+{{ Form::open(array('url' => 'cproducto','enctype'=> 'multipart/form-data')) }}
 
 <div class="row">
 
@@ -21,6 +21,11 @@
         {{ Form::label('activo', 'Estatus activo') }}
         {{ Form::checkbox('activo', Request::old('activo'), false,  
            array('class' => 'form-control')) }}
+    </div>
+
+    <div class="form-group col-md-4"> 
+        {{ Form::label('imagen', 'Imagen')}} <br> 
+        {{ Form::file('imagen', ['accept'=>"image/x-png,image/gif,image/jpeg", 'style' => 'background: #3490dc; border-radius:4px; padding:10px;']) }} <br>
     </div>
 
 </div>
