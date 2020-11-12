@@ -1,5 +1,5 @@
-@extends('layouts.internal')
-@section('content')
+@extends('layouts.internal') 
+@section('content') 
 
 @if( \Auth::user()->roles_id== 1 ) 
 <a href="{{route('users.create')}}">Registrar usuario</a> <br> <br> 

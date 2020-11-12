@@ -17,9 +17,19 @@ class UserController extends Controller
     }
 
 
-    public function index(){
-        $tableUsers = UserEloquent::all();
-        return view('users.index', ["tableUsers" =>  $tableUsers ]);
+    public function index(Request $request){
+        $whereClause = []; 
+        if($request->nombre){ 
+            array_push($whereClause, [ "name" ,'like', '%'.$request->nombre.'%' ]);  
+        } 
+
+        $tableUsers = UserEloquent::orderBy('name')->where($whereClause)->get();
+        if(\Auth::user()->roles_id != 1){ 
+            return view('users.NotAllowed', ["tableUsers" =>  $tableUsers, "filtroNombre" => $request->nombre ]); 
+        } 
+
+        
+        return view('users.index', ["tableUsers" =>  $tableUsers, "filtroNombre" => $request->nombre ]);
     }
 
 
