@@ -22,10 +22,11 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm"  style="background-image: url('{{ asset('images/fondoMdd.jpg')}}'); background-size: cover;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="{{ asset('images/logol.png')}}" alt="logotipa MATERIAL GIRL" style="width: 120px; height: 120px; border-radius: 50%; margin: -10px;">
+                    <!-- {{ config('app.name', 'Laravel') }} -->
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -42,36 +43,36 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('users.index') }}">Usuarios</a>
+                                    <a class="nav-link" href="{{ route('users.index') }}"  style="color:#333; font:900 16px arial;">Usuarios</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('productos.index') }}">Productos</a>
+                                    <a class="nav-link" href="{{ route('productos.index')  }}">Productos</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('users.index') }}">Usuarios</a>
+                                    <a class="nav-link" href="{{ route('users.index') }}"  style="color:#333; font:900 16px arial;">Usuarios</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
+                                    <a class="nav-link" href="{{ route('roles.index') }}"  style="color:#333; font:900 16px arial;">Roles</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('cproducto.index') }}">Categoria Producto</a>
+                                    <a class="nav-link" href="{{ route('cproducto.index')  }}" style="color:#333; font:900 16px arial;">Categoria Producto</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('productos.index') }}">Productos</a>
+                                    <a class="nav-link" href="{{ route('productos.index')  }}" style="color:#333; font:900 16px arial;">Productos</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('detalle_venta.index') }}">Detalle de venta</a>
+                                    <a class="nav-link" href="{{  route('detalle_venta.index') }}" style="color:#333; font:900 16px arial;">Detalle de venta</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#333; font:900 16px arial;" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit();" style="color:#333; font:900 16px arial;">
                                         {{ __('Logout') }}
                                     </a>
 
