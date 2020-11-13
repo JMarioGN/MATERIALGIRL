@@ -95,7 +95,7 @@ class rolesController extends Controller
 
         $mroles->save();
 
-        Session::flash('message', 'Rol actualizado!');
+        Session::flash('message', '¡Rol actualizado!');
         return Redirect::to('roles');
     }
 
@@ -109,7 +109,7 @@ class rolesController extends Controller
     {
         $mroles = roles::find($id);
         $mroles->delete();
-        Session::flash('message', 'Rol eliminado!');
+        Session::flash('message', '¡Rol eliminado!');
         return Redirect::to('roles');
     }
 }

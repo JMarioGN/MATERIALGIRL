@@ -60,7 +60,7 @@ class detalle_ventaController extends Controller
 
         $mDetalle_venta->save();
 
-        Session::flash('message', 'Detalle de venta registrado!');
+        Session::flash('message', '¡Detalle de venta registrado!');
         return Redirect::to('detalle_venta');
     }
 
@@ -118,7 +118,7 @@ class detalle_ventaController extends Controller
 
         $mDetalle_venta->save();
 
-        Session::flash('message', 'Detalle de venta editado!');
+        Session::flash('message', '¡Detalle de venta editado!');
         return Redirect::to('detalle_venta');
     }
 
@@ -133,7 +133,7 @@ class detalle_ventaController extends Controller
         $mDetalle_venta = detalle_venta::find($id);
         $mDetalle_venta->delete();
 
-        Session::flash('message', 'Detalle de venta eliminado!');
+        Session::flash('message', '¡Detalle de venta eliminado!');
         return Redirect::to('detalle_venta');
     }
 }

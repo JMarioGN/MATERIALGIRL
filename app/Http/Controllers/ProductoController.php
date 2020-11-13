@@ -63,7 +63,7 @@ class ProductoController extends Controller
         }
 
         // Regresa a lista de productos
-        Session::flash('message', 'Producto creado!');
+        Session::flash('message', '¡Producto creado!');
         return Redirect::to('productos');
     }
 
@@ -110,7 +110,7 @@ class ProductoController extends Controller
         } 
 
 
-        Session::flash('message', 'Producto actualizado!');
+        Session::flash('message', '¡ACTUALIZADO!');
         return Redirect::to('productos');
         
     }
@@ -119,7 +119,7 @@ class ProductoController extends Controller
     {
         $mProducto = Producto::find($id);
         $mProducto->delete();
-        Session::flash('message', 'Producto eliminado!');
+        Session::flash('message', '¡ELIMINADO!');
         return Redirect::to('productos');
     }
 

@@ -100,7 +100,7 @@ class UserController extends Controller
         $mUser->save();
 
         // Regresa a lista de usuario
-        Session::flash('message', 'Usuario actualizado!');
+        Session::flash('message', '¡Usuario actualizado!');
         return Redirect::to('users');
     }
 
@@ -110,7 +110,7 @@ class UserController extends Controller
         $mUser = UserEloquent::find($id);
         $mUser->delete();
 
-        Session::flash('message', 'Usuario eliminado!');
+        Session::flash('message', '¡Usuario eliminado!');
         return Redirect::to('users');
     }
 
