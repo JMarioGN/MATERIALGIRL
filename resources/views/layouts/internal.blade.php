@@ -4,10 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Icono en pestaña -->
+    <link rel="shortcut icon" href="{{ asset('images/logol.png') }}" />
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>MATERIAL GIRL</title><!-- {{ config('app.name', 'Laravel') }} -->
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -60,6 +63,9 @@
                             </li>
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ route('productos.index')  }}" style="color:#333; font:900 16px arial;">Productos</a>
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('proveedores.index')  }}" style="color:#333; font:900 16px arial;">Proveedores</a>
                             </li>
                             <li class="nav-item">
                                     <a class="nav-link" href="{{  route('detalle_venta.index') }}" style="color:#333; font:900 16px arial;">Detalle de venta</a>
