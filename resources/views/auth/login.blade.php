@@ -10,18 +10,7 @@
 
         <div class="card card-login card-hidden mb-3">
           <div class="card-header card-header-primary text-center">
-            <h4 class="card-title"><strong>{{ __('Login') }}</strong></h4>
-            <div class="social-line">
-              <a href="#" class="btn btn-just-icon btn-link btn-white">
-                <i class="fa fa-facebook-square"></i>
-              </a>
-              <a href="#" class="btn btn-just-icon btn-link btn-white">
-                <i class="fa fa-twitter"></i>
-              </a>
-              <a href="#" class="btn btn-just-icon btn-link btn-white">
-                <i class="fa fa-google-plus"></i>
-              </a>
-            </div>
+            <h4 class="card-title"><strong>{{ __('Iniciar Sesión') }}</strong></h4>
           </div>
           <div class="card-body">
             <p class="card-description text-center">{{ __('Ingresa tu correo eletrónico y contraseña para acceder') }}</p>
@@ -70,18 +59,18 @@
         </div>
       </form>
       <div class="row">
-        <div class="col-6">
+        {{--<div class="col-6">
             @if (Route::has('password.request'))
                 <a href="{{ route('password.request') }}" class="text-light">
                     <small>{{ __('Forgot password?') }}</small>
                 </a>
             @endif
-        </div>
-        <div class="col-6 text-right">
+        </div>--}}
+        {{--<div class="col-6 text-right">
             <a href="{{ route('register') }}" class="text-light">
                 <small>{{ __('Create new account') }}</small>
             </a>
-        </div>
+        </div>--}}
       </div>
     </div>
   </div>
