@@ -141,7 +141,40 @@
         </div>
         <img src="images/anuncio1.png" alt="" style="width: 100%; max-width: 1780px;">
         <img src="images/anuncio2.png" alt="" style="width: 100%;max-width: 1780px; margin:5px 0;">
-        <img src="images/anuncio3.png" alt="" style="width: 100%;max-width: 1780px;">
+        <img src="images/anuncio3.png" alt="" style="width: 100%;max-width: 1780px;"><br><br>
+
+    <table class="table table-hover" style="width: 50%; border-radius: 6px; text-align:center; margin: 0 auto;">
+        <thead style="background: #BB8FCE; color: #fff;">
+            <tr>
+                <th style="text-align: center; font:100 19px arial; border-radius: 0 6px 0 0;">Foto</th>
+                <th style="text-align: center; font:100 19px arial; border-radius: 6px 0 0 0;">Nombre</th>
+                <th style="text-align: center; font:100 19px arial;">Categoría</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($tableProductos as $rowProducto)
+            <tr>
+                <td style="background: white;">
+                    <div class="d-flex align-items-center justify-content-center" style=" height: 140px;">
+                        <div><img src="{{ asset('storage/'.$rowProducto->imgNombreFisico )}}" style="width: 90%; max-width: 190px; height: 150px; border-radius: 4px;" ></div>
+                    </div>
+                    
+                </td>
+                <td style="background: white;">
+                    <div  class="d-flex align-items-center" style=" height: 140px;">
+                        <div><a href="{{route('productos.show', $rowProducto->id)}}" style="color: #333; font:500 17px arial;">{{$rowProducto->nombre}}</a></div>
+                    </div>               
+                </td>
+                <td style="background: white;">
+                    <div class="d-flex align-items-center justify-content-center" style=" height: 140px;">
+                        <div style="color: #333; font:500 17px arial;">{{$rowProducto->categoria_producto}}</div>
+                    </div>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
     </section>              
 
 
