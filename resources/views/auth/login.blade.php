@@ -10,7 +10,7 @@
 
         <div class="card card-login card-hidden mb-3">
           <div class="card-header card-header-primary text-center">
-            <h4 class="card-title"><strong>{{ __('Iniciar Sesión') }}</strong></h4>
+            <h4 class="card-title"><strong><i class="fab fa-searchengin"></i>{{ __('Iniciar Sesión') }}</strong></h4>
           </div>
           <div class="card-body">
             <p class="card-description text-center">{{ __('Ingresa tu correo eletrónico y contraseña para acceder') }}</p>

@@ -1,43 +1,69 @@
 @extends('layouts.internal')
 @section('content')
 
-<a href="{{route('productos.create')}}">Registrar producto</a> <br> <br>
-@if(Session::has('message'))
-      {{ Session::get('message') }} <br><br>
-@endif
-<div class="d-flex justify-content-center">
-    <table class="table table-hover" style="width: 50%; border-radius: 6px;">
-    <thead style="background: #BB8FCE; color: #fff;">
-        <tr>
-            <th style="text-align: center; font:100 19px arial; border-radius: 6px 0 0 0;">Nombre</th>
-            <th style="text-align: center; font:100 19px arial;">Categoría</th>
-            <th style="text-align: center; font:100 19px arial; border-radius: 0 6px 0 0;">Foto</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($tableProductos as $rowProducto)
-            <tr>
-                <td style="background: #A3E4D7;">
-                    <div  class="d-flex align-items-center" style=" height: 140px;">
-                        <div><a href="{{route('productos.show', $rowProducto->id)}}" style="color: #333; font:500 17px arial;">{{$rowProducto->nombre}}</a></div>
-                    </div>               
-                </td>
-                <td style="background: #A3E4D7;">
-                    <div class="d-flex align-items-center justify-content-center" style=" height: 140px;">
-                        <div style="color: #333; font:500 17px arial;">{{$rowProducto->categoria_producto}}</div>
-                    </div>
-                </td>
-                <td style="background: #A3E4D7;">
-                    <div class="d-flex align-items-center justify-content-center" style=" height: 140px;">
-                        <div><img src="{{ asset('storage/'.$rowProducto->imgNombreFisico )}}" style="width: 90%; max-width: 190px; height: 150px; border-radius: 4px;" ></div>
-                    </div>
-                    
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
-</div>
+<!-- CSS diseño -->
+<link href="{{ asset('css/f.css') }}" rel="stylesheet">
+<!-- ICONOS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
 
+@if( \Auth::user()->roles_id== 1 ) 
+    <a href="{{route('productos.create')}}" class=" btn btn-primary btr"><span class="oi oi-plus"></span></a>
+    <b>Nuevo producto</b> <br> <br>
+    @else 
+    No tienes permisos de registrar productos 
+    @endif 
+
+    @if(Session::has('message'))
+          {{ Session::get('message') }} <br><br>
+    @endif
+
+    
+<div class="d-flex justify-content-center">
+    <div class="row iw"> 
+        <div class="form-group col-md-3"> 
+            <form class="divf"> 
+                <label for="nombre">Filtrar por nombre</label> 
+                <input type="text" name="nombre" value="{{$filtroNombre}}" class="form-control ci"><br>
+                <button class="btn btn-primary bt">
+                    <span class="oi oi-magnifying-glass"></span> Buscar
+                </button>
+            </form>
+        </div> 
+        <div class="form-group col-md-9"> 
+            <table class="table table-striped table-default">
+                <thead class="thead">
+                    <tr class="tr">
+                        <th>Nombre</th>
+                        <th>Foto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($tableProductos as $rowProducto)
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center alto">
+                                    <div>
+                                        @if( \Auth::user()->roles_id!= 1 )
+                                        <p class="a">{{$rowProducto->nombre}}</p>
+                                        @else 
+                                        <a href="{{route('productos.show', $rowProducto->id)}}" class="a">{{$rowProducto->nombre}} <span class="oi oi-eye"></span></a>
+                                        @endif 
+                                    </div>
+                                </div>               
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center justify-content-center alto">
+                                    <div>
+                                        <img src="{{ asset('storage/'.$rowProducto->imgNombreFisico )}}" class="img1">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div> 
+    </div> 
+</div>
 
 @endsection

@@ -1,85 +1,49 @@
 @extends('layouts.internal')
 @section('content')
 
+<!-- CSS diseño -->
+<link href="{{ asset('css/f.css') }}" rel="stylesheet">
+<!-- ICONOS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
 
-<a href="{{route('proveedores.index')}}">Inicio</a> <br><br>
+<a href="{{route('proveedores.index')}}" class=" btn btn-primary btr"><span class="oi oi-chevron-left"></span></a><b> Regresar</b> <br><br>
+
 <div class="d-flex justify-content-center">
-    <table class="table table-striped" class="table table-hover" style="width: 60%; border-radius: 6px;">
-        <thead style="background: #BB8FCE; color: #fff;">
-            <tr style="text-align: center; font:100 19px arial; border-radius: 6px 0 0 0;">
-                <th style="text-align: center; font:100 19px arial; border-radius: 6px 0 0 0;">Información de los proveedores</th>
-                <th style="text-align: center; font:100 19px arial; border-radius: 0 6px 0 0;">
+    <table class="table table-striped table-default tamt">
+        <thead class="thead">
+            <tr class="tr">
+                <th>Información de los proveedores</th>
+                <th>
                     {{ Form::open(array('url' => route('proveedores.destroy', $modelo->id), 'class' => 'pull-right')) }}
-                        <a class="btn btn-primary" href="{{route('proveedores.edit', $modelo->id)}}">Editar</a>
+                        <a class="btn btn-primary pull-left" href="{{route('proveedores.edit', $modelo->id)}}"><span class="oi oi-pencil"></span></a>
                         {{ Form::hidden('_method', 'DELETE') }}
-                        {{ Form::submit('Borrar', array('class' => 'btn btn-danger')) }}
+                        <button class="btn btn-danger pull-left"><span class="oi oi-x"></span></button>
                     {{ Form::close() }}
                 </th>
             </tr>
         </thead>
         <tbody>
                 <tr>
-                    <td style="background: #A3E4D7;">
-                        <div class="d-flex align-items-center" style=" height: 20px;">
-                            <div> Nombre del proveedor</div>
-                        </div> 
-                    </td> 
-                    <td style="background: #A3E4D7;">
-                        <div class="d-flex align-items-center" style=" height: 20px;">
-                            <div> {{$modelo->nombre}}</div>
-                        </div> 
-                    </td> 
+                    <td>Nombre del proveedor</td> 
+                    <td>{{$modelo->nombre}}</td> 
                 </tr>
                 <tr>
-                    <td style="background: #A3E4D7;">
-                        <div class="d-flex align-items-center" style=" height: 20px;">
-                            <div> Dirección</div>
-                        </div> 
-                    </td> 
-                    <td style="background: #A3E4D7;">
-                        <div class="d-flex align-items-center" style=" height: 20px;">
-                            <div> {{$modelo->direccion}}</div>
-                        </div> 
-                    </td> 
+                    <td>Dirección</td> 
+                    <td>{{$modelo->direccion}}</td> 
                 </tr>
                 <tr>
-                    <td style="background: #A3E4D7;">
-                        <div class="d-flex align-items-center" style=" height: 20px;">
-                            <div> Teléfono</div>
-                        </div> 
-                    </td> 
-                    <td style="background: #A3E4D7;">
-                        <div class="d-flex align-items-center" style=" height: 20px;">
-                            <div> {{$modelo->telefono}}</div>
-                        </div> 
-                    </td> 
+                    <td>Teléfono</td> 
+                    <td>{{$modelo->telefono}}</td> 
                 </tr>
                 <tr>
-                    <td style="background: #A3E4D7;">
-                        <div class="d-flex align-items-center" style=" height: 20px;">
-                            <div> Fecha de registro</div>
-                        </div> 
-                    </td> 
-                    <td style="background: #A3E4D7;">
-                        <div class="d-flex align-items-center" style=" height: 20px;">
-                            <div> {{$modelo->created_at}}</div>
-                        </div> 
-                    </td> 
+                    <td>Fecha de registro</td> 
+                    <td>{{$modelo->created_at}}</td> 
                 </tr>
                 <tr>
-                    <td style="background: #A3E4D7;">
-                        <div class="d-flex align-items-center" style=" height: 20px;">
-                            <div> Fecha de modificación</div>
-                        </div> 
-                    </td> 
-                    <td style="background: #A3E4D7;">
-                        <div class="d-flex align-items-center" style=" height: 20px;">
-                            <div> {{$modelo->updated_at}}</div>
-                        </div> 
-                    </td> 
+                    <td>Fecha de modificación</td> 
+                    <td>{{$modelo->updated_at}}</td> 
                 </tr>
         </tbody>
-
     </table>
 </div>
 

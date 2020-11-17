@@ -33,5 +33,8 @@ Route::group(['middleware' => ['auth'] ], function(){
     Route::resource('roles', 'rolesController');
     Route::resource('cproducto', 'cproductoController');
     Route::resource('detalle_venta', 'detalle_ventaController');
+    Route::resource('detalle_compra', 'detalle_compraController');
     Route::resource('proveedores', 'proveedoresController');
+    Route::resource('talla', 'tallaController');
+    Route::resource('compra', 'compraController');
 });

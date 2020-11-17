@@ -15,10 +15,20 @@ class proveedoresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $table = proveedores::all();
-        return view('proveedores.index', ["table" =>  $table ]);
+        $whereClause = []; 
+        if($request->nombre){ 
+            array_push($whereClause, [ "nombre" ,'like', '%'.$request->nombre.'%' ]);  
+        } 
+
+        $table = proveedores::orderBy('nombre')->where($whereClause)->get();
+
+        if(\Auth::user()->roles_id != 1){ 
+            return view('proveedores.NotAllowed', ["table" =>  $table, "filtroNombre" => $request->nombre ]); 
+        } 
+
+        return view('proveedores.index', ["table" =>  $table, "filtroNombre" => $request->nombre ]);
     }
 
     /**

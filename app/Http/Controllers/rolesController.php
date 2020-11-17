@@ -6,6 +6,7 @@ use Session;
 Use Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\UserEloquent;
 use App\Models\roles;
 
 class rolesController extends Controller
@@ -15,10 +16,21 @@ class rolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $table = roles::all();
-        return view('roles.index', ["table" =>  $table ]);
+        $whereClause = []; 
+        if($request->nombre){ 
+            array_push($whereClause, [ "nombre" ,'like', '%'.$request->nombre.'%' ]);  
+        } 
+
+        
+        $table = roles::orderBy('nombre')->where($whereClause)->get();
+
+        if(\Auth::user()->roles_id != 1){ 
+            return view('roles.NotAllowed', ["table" =>  $table, "filtroNombre" => $request->nombre ]); 
+        } 
+        
+        return view('roles.index', ["table" =>  $table,"filtroNombre" => $request->nombre ]);
     }
 
     /**

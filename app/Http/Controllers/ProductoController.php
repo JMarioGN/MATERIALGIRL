@@ -11,14 +11,21 @@ use App\Models\cProducto;
 
 class ProductoController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        $whereClause = []; 
+        if($request->nombre){ 
+            array_push($whereClause, [ "nombre" ,'like', '%'.$request->nombre.'%' ]);  
+        } 
 
-        $tableUsers = DB::table('producto')
-        ->join('cproducto', 'producto.cproducto_id', '=', 'cproducto.id')
-        ->select('producto.*', 'cproducto.nombre as categoria_producto')
+        $tableProductos = Producto::orderBy('nombre')
+        ->where($whereClause)
         ->get();
 
-        return view('productos.index', ["tableProductos" =>  $tableUsers ]);
+        if(\Auth::user()->roles_id != 1){ 
+            return view('productos.NotAllowed', ["tableProductos" =>  $tableProductos, "filtroNombre" => $request->nombre ]); 
+        } 
+
+        return view('productos.index', ["tableProductos" =>  $tableProductos, "filtroNombre" => $request->nombre ]);
     }
 
     public function create()
@@ -39,8 +46,6 @@ class ProductoController extends Controller
         $validatedData = $request->validate([
             'nombre' => 'required|min:20|max:100',
             'descripcion' => 'required|min:50|max:200',
-            'precio' => 'required|numeric|min:0',
-            'stock' => 'required|numeric|min:0',
             'cproducto_id' => 'required|exists:cproducto,id'
         ]);
  
@@ -85,8 +90,6 @@ class ProductoController extends Controller
         $validatedData = $request->validate([
             'nombre' => 'required|min:20|max:100',
             'descripcion' => 'required|min:50|max:200',
-            'precio' => 'required|numeric|min:0',
-            'stock' => 'required|numeric|min:0',
             'cproducto_id' => 'required|exists:cproducto,id'
         ]);
 

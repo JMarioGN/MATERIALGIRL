@@ -1,0 +1,24 @@
+/* CREATE/EDIT */
+.ch{width: 50%;}
+.h1{color: #000; text-align: center;}
+.divf{background-image: url('../images/fondoMd.jpg'); background-size: cover; border-radius: 4px; color:#fff; font:500 17px arial; padding: 12px 15px;}
+.ci{border:4px solid #00FFCC; border-radius:3px;}
+.cimg{background: #00FFCC; border-radius:4px; padding:10px;} /* esta clase solo a los que cuentan con imagen*/
+.tamimg{width: 100%; border-radius: 6px;} /*solo esta clase para editar fotos*/
+.bt{background: linear-gradient(to right, rgba(203,96,179,1) 0%, rgba(193,70,161,1) 0%, rgba(168,0,119,1) 70%, rgba(95,22,116,1) 100%); color:#fff; border-radius:4px; padding:15px 35px;}
+
+
+/* INDEX/SHOW */
+
+.tamt{width: 60%; border-radius: 6px;}
+.thead{background: #BB8FCE; color: #fff;}
+.tr{text-align: center; font:100 19px arial;}
+.img{width: 90%; max-width: 410px; height: 130px; border-radius: 4px;} /*img categoria*/
+.img1{width: 90%; max-width: 190px; height: 150px; border-radius: 4px;} /*img producto*/
+.alto{height: 140px;} /* los que tienen foto*/
+.a{color: #333; font:500 17px arial;}
+
+/* index admin*/
+.iw{width: 90%;}
+
+.btr{border-radius: 50%;}

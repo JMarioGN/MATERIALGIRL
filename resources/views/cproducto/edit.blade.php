@@ -1,41 +1,50 @@
 @extends('layouts.internal')
 @section('content')
 
-<a href="{{ route('cproducto.show', $modelo->id) }}">Regresar</a> <br> <br>
+<!-- CSS diseño -->
+<link href="{{ asset('css/f.css') }}" rel="stylesheet">
+<!-- ICONOS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
 
-<h1>Formulario de actualización</h1>
+<div class="d-flex justify-content-center">
+    <div class="ch">
+        <a href="{{ route('cproducto.show', $modelo->id) }}" class=" btn btn-primary btr"><span class="oi oi-chevron-left"></span></a>
+        <b>Regresar</b> <br> <br>
 
-{{ HTML::ul($errors->all()) }}
+        <h1 class="h1">Formulario de actualización</h1>
 
-{{ Form::model( $modelo, array('route' => array('cproducto.update', $modelo->id), 'method' => 'PUT','enctype'=> 'multipart/form-data') ) }}
+        {{ HTML::ul($errors->all()) }}
+
+        {{ Form::model( $modelo, array('route' => array('cproducto.update', $modelo->id), 'method' => 'PUT','enctype'=> 'multipart/form-data') ) }}
 
 
-<div class="row">
+        <div class="row divf">
 
-    <div class="form-group col-md-4">
-        {{ Form::label('nombre', 'Nombre') }}
-        {{ Form::text('nombre', null, 
-           array('class' => 'form-control', 'required'=>true)) }}
-    </div>
+            <div class="form-group col-md-6">
+                {{ Form::label('nombre', 'Nombre') }}
+                {{ Form::text('nombre', null, 
+                   array('class' => 'form-control ci', 'required'=>true)) }}
+            </div>
 
-    
+            
 
-    <div class="form-group col-md-4">
-        {{ Form::label('activo', 'Estatus activo') }}
-        {{ Form::checkbox('activo', Request::old('activo'), $modelo->activo,
-           array('class' => 'form-control')) }}
-    </div>
+            <div class="form-group col-md-6">
+                {{ Form::label('activo', 'Estatus activo') }}
+                {{ Form::checkbox('activo', Request::old('activo'), $modelo->activo,
+                   array('class' => 'form-control ci')) }}
+            </div>
 
-    <div class="form-group col-md-8"> 
-        {{ Form::label('imagen', 'Imagen')}} <br> 
-        <img src="{{ asset('storage/'.$modelo->imgNombreFisico )}}" style="width: 90%; max-width: 480px; border-radius: 6px;"><br><br>
-        {{ Form::file('imagen', ['accept'=>"image/x-png,image/gif,image/jpeg",'style' => 'background: #3490dc; border-radius:4px; padding:10px;']) }} <br>
+            <div class="form-group col-md-12"> 
+                {{ Form::label('imagen', 'Imagen')}} <br> 
+                <img src="{{ asset('storage/'.$modelo->imgNombreFisico )}}" class="tamimg"><br><br>
+                {{ Form::file('imagen', ['accept'=>"image/x-png,image/gif,image/jpeg",'class' => 'cimg']) }} <br>
+            </div>
+        </div>
+        <br>
+        {{ Form::submit('Actualizar categoria de producto', array('class' => 'btn btn-primary bt')) }}
+
+        {{ Form::close() }}
     </div>
 </div>
-
-
-    {{ Form::submit('Actualizar categoria de producto', array('class' => 'btn btn-primary')) }}
-
-{{ Form::close() }}
 
 @endsection

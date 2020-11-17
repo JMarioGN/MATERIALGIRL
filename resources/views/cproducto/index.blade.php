@@ -1,35 +1,63 @@
 @extends('layouts.internal')
 @section('content')
 
-<a href="{{route('cproducto.create')}}">Registrar categoria de producto</a> <br> <br>
-@if(Session::has('message'))
-      {{ Session::get('message') }} <br><br>
-@endif
-<div class="d-flex justify-content-center">
-<table class="table table-striped" style="width: 50%; border-radius: 6px;">
-    <thead style="background: #BB8FCE; color: #fff;">
-        <tr>
-            <th style="text-align: center; font:100 19px arial; border-radius: 6px 0 0 0;">Nombre</th>
-            <th style="text-align: center; font:100 19px arial; border-radius: 0 6px 0 0;">Foto</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($table as $row)
-            <tr>
-                <td style="background: #48C9B0;">
-                    <div  class="d-flex align-items-center" style=" height: 140px;">
-                        <div><a href="{{route('productos.show', $row->id)}}" style="color: #333; font:500 17px arial;"> 
-                    <a href="{{route('cproducto.show', $row->id)}}">{{$row->nombre}}</a>
-                </div>
-                </td>
-                <td style="background: #48C9B0;">
-                <div class="d-flex align-items-center justify-content-center" style=" height: 140px;">
-                        <div><img src="{{ asset('storage/'.$row->imgNombreFisico )}}" style="width: 90%; max-width: 190px; height: 150px; border-radius: 4px;" >
-                        </div>
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
+<!-- CSS diseño -->
+<link href="{{ asset('css/f.css') }}" rel="stylesheet">
+<!-- ICONOS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
 
+@if( \Auth::user()->roles_id== 1 ) 
+    <a href="{{route('cproducto.create')}}" class=" btn btn-primary btr"><span class="oi oi-plus"></span></a><b>Nueva categoria de producto</b> <br> <br> 
+    @else 
+    No tienes permisos de registrar categorias de productos 
+    @endif 
+
+    @if(Session::has('message'))
+          {{ Session::get('message') }} <br><br>
+    @endif
+
+    
+<div class="d-flex justify-content-center">
+    <div class="row iw"> 
+        <div class="form-group col-md-3"> 
+            <form class="divf"> 
+                <label for="nombre">Filtrar por nombre</label> 
+                <input type="text" name="nombre" value="{{$filtroNombre}}" class="form-control ci"><br>
+                <button class="btn btn-primary bt">
+                    <span class="oi oi-magnifying-glass"></span> Buscar
+                </button>
+            </form>
+        </div> 
+        <div class="form-group col-md-9"> 
+            <table class="table table-striped table-default">
+                <thead class="thead">
+                    <tr class="tr">
+                        <th>Nombre</th>
+                        <th>Foto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($table as $row)
+                        <tr>
+                            <td>
+                                @if( \Auth::user()->roles_id!= 1 )
+                                <p class="a">{{$row->nombre}}</p>
+                                @else 
+                                <a href="{{route('cproducto.show', $row->id)}}" class="a">{{$row->nombre}} <span class="oi oi-eye"></span></a>
+                                @endif 
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <img src="{{ asset('storage/'.$row->imgNombreFisico )}}" class="img" >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div> 
+    </div> 
+</div>
 @endsection

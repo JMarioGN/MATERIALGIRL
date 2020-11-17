@@ -65,10 +65,16 @@
                                     <a class="nav-link" href="{{ route('productos.index')  }}" style="color:#333; font:900 16px arial;">Productos</a>
                             </li>
                             <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('talla.index')  }}" style="color:#333; font:900 16px arial;">Tallas</a>
+                            </li>
+                            <li class="nav-item">
                                     <a class="nav-link" href="{{ route('proveedores.index')  }}" style="color:#333; font:900 16px arial;">Proveedores</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{  route('detalle_venta.index') }}" style="color:#333; font:900 16px arial;">Detalle de venta</a>
+                                    <a class="nav-link" href="{{  route('detalle_compra.index') }}" style="color:#333; font:900 16px arial;">Detalle de compra</a>
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{  route('compra.index') }}" style="color:#333; font:900 16px arial;">Compras</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#333; font:900 16px arial;" v-pre>

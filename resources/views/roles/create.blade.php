@@ -1,29 +1,34 @@
-
 @extends('layouts.internal')
 @section('content')
 
+<!-- CSS diseño -->
+<link href="{{ asset('css/f.css') }}" rel="stylesheet">
+<!-- ICONOS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
 
-<a href="{{ URL::to('roles') }}">Regresar</a> <br> <br>
+<div class="d-flex justify-content-center">
+	<div class="ch">
+		<a href="{{ URL::to('roles') }}" class=" btn btn-primary btr"><span class="oi oi-chevron-left"></span></a>
+        <b>Regresar</b> <br> <br>
 
-<h1>Formulario de creación</h1>
+		<h1 class="h1">Formulario de creación</h1>
 
-{{ HTML::ul($errors->all()) }}
+		{{ HTML::ul($errors->all()) }}
 
-{{ Form::open(array('url' => 'roles')) }}
+		{{ Form::open(array('url' => 'roles')) }}
 
-<div class="row">
+		<div class="row divf">
+			<div class="form-group col-md-12">
+		        {{ Form::label('nombre', 'Nombre del rol') }}
+		        {{ Form::text('nombre', Request::old('nombre'),
+		           array('class' => 'form-control ci', 'required'=>true, 'maxlength'=> 30, 'minlength'=> 5)) }}
+		    </div>
+		</div>
+		<br>
+		    {{ Form::submit('Registrar rol', ['class' => 'btn btn-primary bt'] ) }}
 
-<div class="form-group col-md-4">
-        {{ Form::label('nombre', 'Nombre del rol') }}
-        {{ Form::text('nombre', Request::old('nombre'),
-           array('class' => 'form-control', 'required'=>true, 'maxlength'=> 30, 'minlength'=> 5)) }}
-    </div>
-
+		{{ Form::close() }}
+	</div>
 </div>
-
-    {{ Form::submit('Registrar rol', ['class' => 'btn btn-primary'] ) }}
-
-{{ Form::close() }}
-
 
 @endsection

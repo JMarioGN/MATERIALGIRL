@@ -35,7 +35,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $tablero1 = roles::orderBy('nombre')->get()->pluck('nombre', 'id');
+        $tablero1 = roles::orderBy('nombre')->get()->pluck('nombre','id');
         return view('users.create', ['tablero1'=>$tablero1]);
     }
 

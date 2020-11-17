@@ -16,8 +16,6 @@ class CreateProducto extends Migration
         Schema::create('producto', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',100);
-            $table->integer('stock')->default(0);
-            $table->decimal('precio',13,2)->default(0);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

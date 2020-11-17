@@ -1,31 +1,60 @@
 @extends('layouts.internal')
 @section('content')
 
-<a href="{{route('proveedores.create')}}">Registrar proveedor</a> <br> <br>
-@if(Session::has('message'))
-      {{ Session::get('message') }} <br><br>
-@endif
-<div class="d-flex justify-content-center">
-    <table class="table table-hover" class="table table-hover" style="width: 50%; border-radius: 6px;">
-        <thead style="background: #BB8FCE; color: #fff;">
-            <tr style="text-align: center; font:100 19px arial; border-radius: 6px 0 0 0;">
-                <th>Nombre</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($table as $row)
-                <tr>
-                    <td style="background: #A3E4D7;">
-                        <div  class="d-flex align-items-center" style=" height: 40px;">
-                            <div>
-                                <a href="{{route('proveedores.show', $row->id)}}" style="color: #333; font:500 17px arial;">{{$row->nombre}}</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+<!-- CSS diseño -->
+<link href="{{ asset('css/f.css') }}" rel="stylesheet">
+<!-- ICONOS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
 
+@if( \Auth::user()->roles_id== 1 ) 
+    <a href="{{route('proveedores.create')}}" class=" btn btn-primary btr"><span class="oi oi-plus"></span></a>
+    <b>Nuevo proveedor</b> <br> <br>
+    @else 
+    No tienes permisos de registrar proveedores 
+    @endif 
+
+    @if(Session::has('message'))
+          {{ Session::get('message') }} <br><br>
+    @endif
+
+    
+<div class="d-flex justify-content-center">
+    <div class="row iw"> 
+        <div class="form-group col-md-3"> 
+            <form class="divf"> 
+                <label for="nombre">Filtrar por nombre</label> 
+                <input type="text" name="nombre" value="{{$filtroNombre}}" class="form-control ci"><br>
+                <button class="btn btn-primary bt">
+                    <span class="oi oi-magnifying-glass"></span> Buscar
+                </button>
+            </form>
+        </div> 
+        <div class="form-group col-md-9"> 
+            <table class="table table-striped table-default">
+                <thead class="thead">
+                    <tr class="tr">
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($table as $row)
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        @if( \Auth::user()->roles_id!= 1 )
+                                        <p class="a">{{$row->nombre}}</p>
+                                        @else 
+                                        <a href="{{route('proveedores.show', $row->id)}}" class="a">{{$row->nombre}} <span class="oi oi-eye"></span></a>
+                                        @endif 
+                                    </div>
+                                </div>               
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div> 
+    </div> 
+</div>
 @endsection

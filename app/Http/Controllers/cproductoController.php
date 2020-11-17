@@ -15,10 +15,19 @@ class cproductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $table = cproducto::all();
-        return view('cproducto.index', ["table" =>  $table ]);
+        $whereClause = []; 
+        if($request->nombre){ 
+            array_push($whereClause, [ "nombre" ,'like', '%'.$request->nombre.'%' ]);  
+        } 
+        
+        $table = cproducto::orderBy('nombre')->where($whereClause)->get();
+
+        if(\Auth::user()->roles_id != 1){ 
+            return view('cproducto.NotAllowed', ["table" =>  $table, "filtroNombre" => $request->nombre ]); 
+        } 
+        return view('cproducto.index', ["table" =>  $table,"filtroNombre" => $request->nombre ]);
     }
 
     /**

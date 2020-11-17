@@ -12,7 +12,7 @@ class CreateRoles extends Migration
             $table->timestamps();
         });
         Schema::table('users', function (Blueprint $table){
-            $table->unsignedBigInteger('roles_id')->default(0);
+            $table->unsignedBigInteger('roles_id')->default(3);
         });
     }
     public function down()
