@@ -191,7 +191,7 @@
         <br>
         <div class="d-flex justify-content-center">
             @foreach($tableProductos as $rowProducto)
-                <a href="{{route('productos.show', $rowProducto->id)}}" class="a">{{$rowProducto->nombre}}</a>
+                <a href="{{route('productos.index', $rowProducto->id)}}" class="a">{{$rowProducto->nombre}}</a>
             @endforeach
         </div>
     </div>

@@ -46,45 +46,45 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('users.index') }}"  style="color:#333; font:900 16px arial;">Usuarios</a>
+                                    <a class="nav-link" href="{{ route('users.index') }}"  style="color:#333; font:900 14px arial;">Usuarios</a>
                             </li>
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ route('productos.index')  }}">Productos</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('users.index') }}"  style="color:#333; font:900 16px arial;">Usuarios</a>
+                                    <a class="nav-link" href="{{ route('users.index') }}"  style="color:#333; font:900 14px arial;">Usuarios</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('roles.index') }}"  style="color:#333; font:900 16px arial;">Roles</a>
+                                    <a class="nav-link" href="{{ route('roles.index') }}"  style="color:#333; font:900 14px arial;">Roles</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('cproducto.index')  }}" style="color:#333; font:900 16px arial;">Categoria Producto</a>
+                                    <a class="nav-link" href="{{ route('cproducto.index')  }}" style="color:#333; font:900 14px arial;">Categoria Producto</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('productos.index')  }}" style="color:#333; font:900 16px arial;">Productos</a>
+                                    <a class="nav-link" href="{{ route('productos.index')  }}" style="color:#333; font:900 14px arial;">Productos</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('talla.index')  }}" style="color:#333; font:900 16px arial;">Tallas</a>
+                                    <a class="nav-link" href="{{ route('talla.index')  }}" style="color:#333; font:900 14px arial;">Tallas</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('proveedores.index')  }}" style="color:#333; font:900 16px arial;">Proveedores</a>
+                                    <a class="nav-link" href="{{ route('proveedores.index')  }}" style="color:#333; font:900 14px arial;">Proveedores</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{  route('detalle_compra.index') }}" style="color:#333; font:900 16px arial;">Detalle de compra</a>
+                                    <a class="nav-link" href="{{  route('detalle_compra.index') }}" style="color:#333; font:900 14px arial;">Detalle de compra</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{  route('compra.index') }}" style="color:#333; font:900 16px arial;">Compras</a>
+                                    <a class="nav-link" href="{{  route('compra.index') }}" style="color:#333; font:900 14px arial;">Compras</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#333; font:900 16px arial;" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle"  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#333; font:900 14px arial;" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();" style="color:#333; font:900 16px arial;">
+                                                     document.getElementById('logout-form').submit();" style="color:#333; font:900 14px arial;">
                                         {{ __('Logout') }}
                                     </a>
 

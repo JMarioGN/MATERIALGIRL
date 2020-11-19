@@ -2,7 +2,7 @@
 .ch{width: 50%;}
 .h1{color: #000; text-align: center;}
 .divf{background:#fff; border-radius: 4px; color:#000; font:500 17px arial; padding: 12px 15px; box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.75);}
-.ci{border:4px solid #00FFCC; border-radius:3px;}
+.ci{border:1px solid #00FFCC; border-radius:3px;}
 .cimg{background: #00FFCC; border-radius:4px; padding:10px;} /* esta clase solo a los que cuentan con imagen*/
 .tamimg{width: 100%; border-radius: 6px;} /*solo esta clase para editar fotos*/
 .bt{background: #BB8FCE; color:#fff; border-radius:4px; padding:15px 35px;}

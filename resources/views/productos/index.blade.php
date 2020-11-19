@@ -34,6 +34,7 @@
                 <thead class="thead">
                     <tr class="tr">
                         <th>Nombre</th>
+                        <th> </th>
                         <th>Foto</th>
                     </tr>
                 </thead>
