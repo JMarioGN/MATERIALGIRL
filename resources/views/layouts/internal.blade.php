@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Icono en pestaña -->
-    <link rel="shortcut icon" href="{{ asset('images/logol.png') }}" />
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>MATERIAL GIRL</title><!-- {{ config('app.name', 'Laravel') }} -->
+    <!-- Icono en pestaña n -->
+    <link rel="shortcut icon" href="{{ asset('images/logol.png') }}" />
+
+    <title>{{ config('app.name', 'Laravel') }}</title><!-- {{ config('app.name', 'Laravel') }} -->
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -101,7 +101,14 @@
 
         <main class="p-4">
             @yield('content')
+            <div id="divNotificaciones"></div>
+<script> 
+            var urlNotificaciones = "{{route('notificaciones')}}"; 
+        </script> 
+        {{HTML::script('js/notificaciones.js')}} 
         </main>
     </div>
+
+        
 </body>
 </html>

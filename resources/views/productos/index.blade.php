@@ -40,6 +40,19 @@
                 <tbody>
                     @foreach($tableProductos as $rowProducto)
                         <tr>
+                            <td> 
+                                {{ Form::open(['url' => 'agregarCarrito'] ) }} 
+
+                                {{ Form::hidden('idProducto', $rowProducto->id , array('class' => 'form-control')) }} <br> 
+
+                                {{ Form::text('cantidad', 0 , 
+                                array('class' => 'form-control', 'required'=>true)) }} <br>
+
+                                {{ Form::submit('Agregar',['class' => 'btn btn-primary'] ) }}
+                                 
+                                {{ Form::close()}} 
+                            </td>
+
                             <td>
                                 <div class="d-flex align-items-center alto">
                                     <div>

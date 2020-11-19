@@ -37,4 +37,8 @@ Route::group(['middleware' => ['auth'] ], function(){
     Route::resource('proveedores', 'proveedoresController');
     Route::resource('talla', 'tallaController');
     Route::resource('compra', 'compraController');
+
+    Route::post('/agregarCarrito', 'ProductoController@agregarCarrito') ->name('agregarCarrito'); 
+    Route::get('/notificaciones', 'UserController@notificaciones')->name('notificaciones'); 
+
 });

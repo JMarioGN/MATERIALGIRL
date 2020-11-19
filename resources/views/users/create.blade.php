@@ -22,10 +22,10 @@
                 {{ Form::text('name', Request::old('name'), 
                    array('class' => 'form-control ci', 'required'=>true)) }}
             </div>
-
+            
             <div class="form-group col-md-12">
                 {{ Form::label('password', 'Contraseña') }}
-                {{ Form::text('password', Request::old('password'), array('class' => 'form-control ci', 'required'=>true)) }}
+                {{ Form::password('password', Request::old('password'), array('class' => 'form-control ci', 'required'=>true)) }}
             </div>
 
             <div class="form-group col-md-12">

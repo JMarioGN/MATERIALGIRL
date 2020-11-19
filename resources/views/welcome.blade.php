@@ -8,6 +8,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Icono en pestaña n -->
+    <link rel="shortcut icon" href="{{ asset('images/logol.png') }}" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
     <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -33,6 +37,8 @@
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/flexslider.css">
     <link rel="stylesheet" href="css/style.css">
+    <!-- ICONOS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
     <script src="js/modernizr-2.6.2.min.js"></script>
     
 
@@ -54,8 +60,8 @@
                         <li><a href="#" data-nav-section="practice-areas">NOSOTROS</a></li>
                         <li><a href="#" data-nav-section="productos">PRODUCTOS</a></li>
                         <li><a href="#" data-nav-section="contact"><span>CONTACTO</span></a></li>
-                        <li class="btn-cta"><a class="external" href="{{ route('login') }}"><span>INICIAR SESIÓN</span></a></li>
-                        <li class="btn-cta"><a class="external" href="{{ route('register') }}"><span>REGISTRARSE</span></a></li>
+                        <li class="btn-cta"><a class="external" href="{{ route('login') }}"><span style="background: #BB8FCE;">INICIAR SESIÓN</span></a></li>
+                        <li class="btn-cta"><a class="external" href="{{ route('register') }}"><span style="background: #BB8FCE;">REGISTRARSE</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -139,43 +145,58 @@
                 </div>
             </div>
         </div>
-        <img src="images/anuncio1.png" alt="" style="width: 100%; max-width: 1780px;">
-        <img src="images/anuncio2.png" alt="" style="width: 100%;max-width: 1780px; margin:5px 0;">
-        <img src="images/anuncio3.png" alt="" style="width: 100%;max-width: 1780px;"><br><br>
 
-    <table class="table table-hover" style="width: 50%; border-radius: 6px; text-align:center; margin: 0 auto;">
-        <thead style="background: #BB8FCE; color: #fff;">
-            <tr>
-                <th style="text-align: center; font:100 19px arial; border-radius: 0 6px 0 0;">Foto</th>
-                <th style="text-align: center; font:100 19px arial; border-radius: 6px 0 0 0;">Nombre</th>
-                <th style="text-align: center; font:100 19px arial;">Categoría</th>
-            </tr>
-        </thead>
-        <tbody>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="images/anuncio1.png" alt="Los Angeles">
+    </div>
+
+    <div class="item">
+      <img src="images/anuncio2.png" alt="Chicago">
+    </div>
+
+    <div class="item">
+      <img src="images/anuncio3.png" alt="New York">
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="oi oi-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="oi oi-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<br><br>
+   
+   <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center">
         @foreach($tableProductos as $rowProducto)
-            <tr>
-                <td style="background: white;">
-                    <div class="d-flex align-items-center justify-content-center" style=" height: 140px;">
-                        <div><img src="{{ asset('storage/'.$rowProducto->imgNombreFisico )}}" style="width: 90%; max-width: 190px; height: 150px; border-radius: 4px;" ></div>
-                    </div>
-                    
-                </td>
-                <td style="background: white;">
-                    <div  class="d-flex align-items-center" style=" height: 140px;">
-                        <div><a href="{{route('productos.show', $rowProducto->id)}}" style="color: #333; font:500 17px arial;">{{$rowProducto->nombre}}</a></div>
-                    </div>               
-                </td>
-                <td style="background: white;">
-                    <div class="d-flex align-items-center justify-content-center" style=" height: 140px;">
-                        <div style="color: #333; font:500 17px arial;">{{$rowProducto->categoria_producto}}</div>
-                    </div>
-                </td>
-            </tr>
+            <img class="d-block w-100" src="{{ asset('storage/'.$rowProducto->imgNombreFisico )}}" alt="First slide" style="width: 90%; max-width: 190px; height: 150px; border-radius: 4px;">      
         @endforeach
-        </tbody>
-    </table>
+    </div>
+    
+        <br>
+        <div class="d-flex justify-content-center">
+            @foreach($tableProductos as $rowProducto)
+                <a href="{{route('productos.show', $rowProducto->id)}}" class="a">{{$rowProducto->nombre}}</a>
+            @endforeach
+        </div>
+    </div>
 
-    </section>              
+</section>             
 
 
 

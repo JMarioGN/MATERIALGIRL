@@ -7,6 +7,13 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
 
 
+<!-- para imprimir el id
+@guest 
+No está loggeado 
+@else 
+El id es el {{\Auth::user()->id}} 
+@endif 
+-->
 
 @if( \Auth::user()->roles_id== 1 ) 
                 <a href="{{route('users.create')}}" class=" btn btn-primary btr"><span class="oi oi-plus"></span></a>
@@ -20,7 +27,9 @@
           {{ Session::get('message') }} <br><br>
     @endif
 
-    
+
+        
+
 <div class="d-flex justify-content-center">
     <div class="row iw"> 
         <div class="form-group col-md-3"> 
@@ -58,4 +67,6 @@
         </div> 
     </div> 
 </div>
+
+        
 @endsection

@@ -23,9 +23,9 @@
         <div class="form-group col-md-3"> 
             <form class="divf"> 
                 <label for="nombre">Filtrar por nombre</label> 
-                <input type="text" name="nombre" value="{{$filtroNombre}}" class="form-control ci"><br>
+                <input type="text" name="nombre" value="{{$filtroNombre}}" class="form-control ci" style="background: #BB8FCE;"><br>
                 <button class="btn btn-primary bt">
-                    <span class="oi oi-magnifying-glass"></span> Buscar
+                    <span class="oi oi-magnifying-glass" ></span> Buscar
                 </button>
             </form>
         </div> 

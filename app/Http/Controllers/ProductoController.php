@@ -11,6 +11,16 @@ use App\Models\cProducto;
 
 class ProductoController extends Controller
 {
+    public function agregarCarrito(Request $request) { 
+        $carrito = $request->session()->get('carrito'); if(!$carrito){ 
+            $carrito = []; 
+        } 
+        array_push($carrito, [ 
+        'idProducto' => $request->idProducto,  'cantidad' => $request->cantidad  
+        ] ); 
+        $request->session()->put('carrito', $carrito); echo var_dump($carrito); 
+    } 
+
     public function index(Request $request){
         $whereClause = []; 
         if($request->nombre){ 

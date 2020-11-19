@@ -16,6 +16,10 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    public function notificaciones() 
+    { 
+        return "Existen " . UserEloquent::count() . " usuarios"; 
+    } 
 
     public function index(Request $request){
         $whereClause = []; 
@@ -23,7 +27,9 @@ class UserController extends Controller
             array_push($whereClause, [ "name" ,'like', '%'.$request->nombre.'%' ]);  
         } 
 
-        $tableUsers = UserEloquent::orderBy('name')->where($whereClause)->get();
+        //->skip(1)->take(2) si queremos limitar las muestras en la tabla
+        $tableUsers = UserEloquent::orderBy('name')
+        ->where($whereClause)->get();
         if(\Auth::user()->roles_id != 1){ 
             return view('users.NotAllowed', ["tableUsers" =>  $tableUsers, "filtroNombre" => $request->nombre ]); 
         } 

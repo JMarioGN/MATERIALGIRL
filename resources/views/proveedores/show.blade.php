@@ -17,7 +17,7 @@
                     {{ Form::open(array('url' => route('proveedores.destroy', $modelo->id), 'class' => 'pull-right')) }}
                         <a class="btn btn-primary pull-left" href="{{route('proveedores.edit', $modelo->id)}}"><span class="oi oi-pencil"></span></a>
                         {{ Form::hidden('_method', 'DELETE') }}
-                        <button class="btn btn-danger pull-left"><span class="oi oi-x"></span></button>
+                        <button class="btn btn-danger pull-left" onclick="return confirm('¿Eliminar registro?') "><span class="oi oi-x"></span></button>
                     {{ Form::close() }}
                 </th>
             </tr>
