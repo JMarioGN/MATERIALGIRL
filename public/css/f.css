@@ -10,7 +10,7 @@
 
 /* INDEX/SHOW */
 
-.tamt{width: 60%; border-radius: 6px;}
+.tamt{width: 90%; border-radius: 6px;}
 .thead{background: #BB8FCE; color: #fff;}
 .tr{text-align: center; font:100 19px arial;}
 .img{width: 90%; max-width: 410px; height: 130px; border-radius: 4px;} /*img categoria*/
@@ -22,3 +22,9 @@
 .iw{width: 90%;}
 
 .btr{border-radius: 50%;}
+
+/* Productos del welcome */
+.pi{
+	background: blue;
+}
+

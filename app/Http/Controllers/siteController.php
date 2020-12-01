@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use Illuminate\Support\Facades\DB;
+use App\Models\compra;
 
 class siteController extends Controller
 {
@@ -16,6 +17,11 @@ class siteController extends Controller
         ->select('producto.*', 'cproducto.nombre as categoria_producto')
         ->get();
 
-        return view('welcome', ["tableProductos" =>  $tableUsers ]);
+        $consultaC = DB::table('compra')
+                        ->join('producto', 'compra.id_producto','=','producto.id')
+                        ->select('compra.*','producto.id' ,'producto.nombre','producto.imgNombreFisico','compra.costo_pieza')
+                        ->take(4)
+                        ->get();
+        return view('welcome', ["tableProductos" =>  $tableUsers, "consultaC" =>  $consultaC, ]);
     }
 }

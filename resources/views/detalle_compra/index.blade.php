@@ -33,7 +33,7 @@
             <table class="table table-striped table-default">
                 <thead class="thead">
                     <tr class="tr">
-                        <th>Número de pedido</th>
+                        <th>Detalle:</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,11 +42,7 @@
                             <td>
                                 <div class="d-flex align-items-center">
                                     <div>
-                                        @if( \Auth::user()->roles_id!= 1 )
-                                        <p class="a">{{$row->no_pedido}}</p>
-                                        @else 
-                                        <a href="{{route('detalle_compra.show', $row->id)}}" class="a">{{$row->no_pedido}} <span class="oi oi-eye"></span></a>
-                                        @endif 
+                                        <a href="{{route('detalle_compra.show', $row->id)}}" class="a">{{$row->detalle}} <span class="oi oi-eye"></span></a>
                                     </div>
                                 </div>               
                             </td>

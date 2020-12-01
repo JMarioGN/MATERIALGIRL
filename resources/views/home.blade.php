@@ -1,3 +1,6 @@
+@if(\Session::has('message'))
+    @include('cataPro.message')
+@endif
 @extends('layouts.internal')
 
 @section('content')

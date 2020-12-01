@@ -8,7 +8,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\detalle_compra;
+use App\Models\compra;
 use App\Models\Producto;
+use App\Models\proveedores;
+use App\Models\UserEloquent;
 use App\Models\talla;
 
 class detalle_compraController extends Controller
@@ -22,10 +25,10 @@ class detalle_compraController extends Controller
     {
         $whereClause = []; 
         if($request->nombre){ 
-            array_push($whereClause, [ "no_pedido" ,'like', '%'.$request->nombre.'%' ]);  
+            array_push($whereClause, [ "detalle" ,'like', '%'.$request->nombre.'%' ]);  
         } 
 
-        $table = detalle_compra::orderBy('no_pedido')
+        $table = detalle_compra::orderBy('detalle')
         ->where($whereClause)
         ->get();
 
@@ -43,10 +46,10 @@ class detalle_compraController extends Controller
      */
     public function create()
     {
-        $comboProducto = Producto::orderBy('nombre')->get()->pluck('nombre','id');
-        $comboTalla = talla::orderBy('nombre')->get()->pluck('nombre','id');
+        $comboProveedor = proveedores::orderBy('nombre')->get()->pluck('nombre','id');
+        $comboUsuario = UserEloquent::orderBy('name')->get()->pluck('name','id');
 
-        return view('detalle_compra.create',[ 'comboProducto' => $comboProducto, 'comboTalla' => $comboTalla ]);
+        return view('detalle_compra.create',[ 'comboProveedor' => $comboProveedor, 'comboUsuario' => $comboUsuario ]);
     }
 
     /**
@@ -58,15 +61,9 @@ class detalle_compraController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'no_pedido' => 'required|min:3|max:100',
-            'costo_pieza' => 'required|min:2|max:100',
-            'color' => 'required|min:4|max:100',
-            'fecha_compra' => 'required',
-            'marca' => 'required|min:4|max:100',
-            'modelo' => 'required|min:4|max:100',
-            'cantidad' => 'required|min:1|max:100',
-            'id_producto' => 'required',
-            'id_talla' => 'required',
+            'detalle' => 'required|min:4|max:100',
+            'id_usuario' => 'required',
+            'id_proveedor' => 'required',
         ]);
  
         $mdetalle_compra = new detalle_compra($request->all());
@@ -85,8 +82,17 @@ class detalle_compraController extends Controller
      */
     public function show($id)
     {
+        $detalleItems = DB::table('compra')
+                        ->join('producto', 'compra.id_producto','=','producto.id')
+                        ->join('talla', 'compra.id_talla','=','talla.id')
+                        ->select('producto.id','producto.imgNombreFisico', 'producto.nombre', 'compra.cantidad','compra.costo_pieza','compra.marca','compra.modelo','talla.talla')
+                        ->where('compra.id_detalle_compra', '=', $id)
+                        ->get();
         $modelo = detalle_compra::find($id);
-        return view('detalle_compra.show', ["modelo" => $modelo]);
+        
+        //return $m;
+
+        return view('detalle_compra.show', ["modelo" => $modelo,"detalleItems" => $detalleItems]);
     }
 
     /**
@@ -97,32 +103,19 @@ class detalle_compraController extends Controller
      */
     public function edit($id)
     {
+        $comboProveedor = proveedores::orderBy('nombre')->get()->pluck('nombre','id');
+        $comboUsuario = UserEloquent::orderBy('name')->get()->pluck('name','id');
         $modelo = detalle_compra::find($id);
-        $table = detalle_compra::orderBy('no_pedido')->get()->pluck('nombre','id');
-        $comboProducto = Producto::orderBy('nombre')->get()->pluck('nombre','id');
-        $comboTalla = talla::orderBy('nombre')->get()->pluck('nombre','id');
-        return view('detalle_compra.edit', ["modelo" => $modelo, "table"=>$table, 'comboProducto' => $comboProducto, 'comboTalla' => $comboTalla]);
+        
+        return view('detalle_compra.edit', ["modelo" => $modelo,'comboProveedor' => $comboProveedor, 'comboUsuario' => $comboUsuario]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'no_pedido' => 'required|min:3|max:100',
-            'costo_pieza' => 'required|min:2|max:100',
-            'color' => 'required|min:4|max:100',
-            'fecha_compra' => 'required',
-            'marca' => 'required|min:4|max:100',
-            'modelo' => 'required|min:4|max:100',
-            'cantidad' => 'required|min:1|max:100',
-            'id_producto' => 'required',
-            'id_talla' => 'required',
+            'detalle' => 'required|min:4|max:100',
+            'id_usuario' => 'required',
+            'id_proveedor' => 'required',
         ]);
  
         $mdetalle_compra = detalle_compra::find($id);
@@ -142,9 +135,14 @@ class detalle_compraController extends Controller
      */
     public function destroy($id)
     {
+        $mItemscompra = compra::where('id_detalle_compra', '=', $id)
+                        ->first();
+        $mItemscompra->delete();
+
         $mdetalle_compra = detalle_compra::find($id);
         $mdetalle_compra->delete();
         Session::flash('message', '¡ELIMINADO!');
         return Redirect::to('detalle_compra');
+        
     }
 }

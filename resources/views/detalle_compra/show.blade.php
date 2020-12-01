@@ -9,10 +9,16 @@
 <a href="{{route('detalle_compra.index')}}" class=" btn btn-primary btr"><span class="oi oi-chevron-left"></span></a><b> Regresar</b> <br><br>
 
 <div class="d-flex justify-content-center">
-    <table class="table table-striped table-default tamt">
+    <table class="table table-striped table-default">
         <thead class="thead">
-            <tr class="tr">
-                <th>Detalle de compra</th>
+            <tr>
+                <th>{{$modelo->detalle}}</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
                 <th>
                     {{ Form::open(array('url' => route('detalle_compra.destroy', $modelo->id), 'class' => 'pull-right')) }}
                         <a class="btn btn-primary pull-left" href="{{route('detalle_compra.edit', $modelo->id)}}"><span class="oi oi-pencil"></span></a>
@@ -23,19 +29,37 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($detalleItems as $row)
                 <tr>
-                    <td>Número de pedido</td> 
-                    <td>{{$modelo->no_pedido}}</td> 
-                </tr>
-                    <td>Fecha de registro</td> 
-                    <td>{{$modelo->created_at}}</td> 
+                    <td>Foto:</td>
+                    <td>Nombre producto:</td> 
+                    <td>Cantidad:</td>
+                    <td>Costo:</td> 
+                    <td>Marca:</td> 
+                    <td>Modelo:</td> 
+                    <td>Talla:</td> 
+                    <td></td>
                 </tr>
                 <tr>
-                    <td>Fecha de modificación</td> 
-                    <td>{{$modelo->updated_at}}</td> 
+                    <p>{{$row->id}}</p>
+                    <td><img src="{{ asset('storage/'.$row->imgNombreFisico )}}" class="img1"></td>
+                    <td><a href="{{route('compra.edit', $row->id)}}">{{$row->nombre}}</a></td>
+                    <td>{{$row->cantidad}}</td>
+                    <td>{{$row->costo_pieza}}</td>
+                    <td>{{$row->marca}}</td>
+                    <td>{{$row->modelo}}</td>
+                    <td>{{$row->talla}}</td>
+                    <td>
+                        {{ Form::open(array('url' => route('compra.destroy', $modelo->id), 'class' => 'pull-right')) }}
+                        {{ Form::hidden('_method', 'DELETE') }}
+                        <button class="btn btn-danger pull-left" onclick="return confirm('¿Eliminar registro?') "><span class="oi oi-x"></span></button>
+                    {{ Form::close() }}
+                    </td>
                 </tr>
+                
+            @endforeach
         </tbody>
-    </table>
+    </table>    
 </div>
 
 @endsection

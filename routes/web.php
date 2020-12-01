@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+if(version_compare(PHP_VERSION, '7.2.0', '>=')) {
+    error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
+}
+
 Route::get('/', 'siteController@index');
 
 Auth::routes();
@@ -37,6 +41,65 @@ Route::group(['middleware' => ['auth'] ], function(){
     Route::resource('proveedores', 'proveedoresController');
     Route::resource('talla', 'tallaController');
     Route::resource('compra', 'compraController');
+    Route::resource('forma_pago', 'forma_pagoController');
+    Route::resource('ventas', 'ventaController');
+
+    Route::resource('cataPro', 'catalogoController');
+
+    Route::get('cataPro.cart', 'cartController@index')->name('cart');
+
+    
+
+    Route::bind('cataPro.index', function($row){
+        return App\detalle_compra::where('id', $row)->first();
+    });
+    //carrito
+    Route::get('cart/show',[
+        'as' => 'cart-show',
+        'uses' => 'cartController@show'
+    ]);
+
+    Route::get('cart/add/{row}',[
+        'as' => 'cart-add',
+        'uses' => 'cartController@add'
+    ]); 
+
+    Route::get('cart/delete/{row}',[
+        'as' => 'cart-delete',
+        'uses' => 'cartController@delete'
+    ]); 
+
+    Route::get('cart/vaciar/',[
+        'as' => 'cart-vaciar',
+        'uses' => 'cartController@vaciar'
+    ]);
+    Route::get('cart/update/{row}/{cantidad?}',[
+        'as' => 'cart-update',
+        'uses' => 'cartController@update'
+    ]); 
+    
+//------------------------------------------------------
+    //detalle pedido
+    Route::get('order-detail',[
+        'middleware' => 'auth',
+        'as' => 'order-detail',
+        'uses' => 'cartController@orderDetail'
+    ]); 
+//-------------------------------
+    //PAYPAL
+    Route::get('payment',array(
+        'as' => 'payment',
+        'uses' => 'paypalController@postPayment',
+    )); 
+    Route::get('payment/status',array(
+        'as' => 'payment.status',
+        'uses' => 'paypalController@getPaymentStatus',
+    )); 
+
+    //Route::get('cart/create', 'cartController@create')->name('cataPro.create'); 
+    
+
+    
 
     Route::post('/agregarCarrito', 'ProductoController@agregarCarrito') ->name('agregarCarrito'); 
     Route::get('/notificaciones', 'UserController@notificaciones')->name('notificaciones'); 

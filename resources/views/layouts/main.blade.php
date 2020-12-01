@@ -14,9 +14,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
     <link href="{{ asset('css/material-dashboard.css?v=2.1.1') }}" rel="stylesheet" />
-  
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     </head>
     <body class="{{ $class ?? '' }}">
+       
         @auth()
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
@@ -27,10 +29,7 @@
             @include('layouts.page_templates.guest')
         @endguest
         
-        <div id="divNotificaciones"></div> 
-        <script> 
-            var urlNotificaciones = "{{route('notificaciones')}}"; 
-        </script> 
+        
         <script src="{{ asset('js/notificaciones.js') }}"></script>
 
         <!--   Core JS Files   -->

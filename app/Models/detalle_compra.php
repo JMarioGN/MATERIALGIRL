@@ -9,5 +9,11 @@ class detalle_compra extends Model
 {
     use HasFactory;
     protected $table = 'detalle_compra';
-    protected $fillable = ['no_pedido', 'costo_pieza', 'color', 'fecha_compra', 'marca', 'modelo', 'cantidad', 'id_producto', 'id_talla'];
+    protected $fillable = ['detalle', 'id_usuario', 'id_proveedor'];
+
+    public function getProducto()
+    {
+                            // Modelo de referencia, campo local, campo foráneo 
+        return $this->belongsTo('App\Models\Producto','id_producto','id');
+    }
 }

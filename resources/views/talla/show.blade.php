@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-                <tr><td> Nombre de la talla </td> <td>{{$modelo->nombre}}</td></tr>
+                <tr><td> Nombre de la talla </td> <td>{{$modelo->talla}}</td></tr>
                 <tr><td> Fecha de registro </td> <td>{{$modelo->created_at}}</td></tr>
                 <tr><td> Fecha de modificación </td> <td>{{$modelo->updated_at}}</td></tr>
         </tbody>

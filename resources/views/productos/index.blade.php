@@ -34,13 +34,13 @@
                 <thead class="thead">
                     <tr class="tr">
                         <th>Nombre</th>
-                        <th> </th>
                         <th>Foto</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($tableProductos as $rowProducto)
                         <tr>
+                        <!--
                             <td> 
                                 {{ Form::open(['url' => 'agregarCarrito'] ) }} 
 
@@ -53,7 +53,7 @@
                                  
                                 {{ Form::close()}} 
                             </td>
-
+                        -->
                             <td>
                                 <div class="d-flex align-items-center alto">
                                     <div>

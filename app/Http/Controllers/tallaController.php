@@ -20,11 +20,11 @@ class tallaController extends Controller
     {
         $whereClause = []; 
         if($request->nombre){ 
-            array_push($whereClause, [ "nombre" ,'like', '%'.$request->nombre.'%' ]);  
+            array_push($whereClause, [ "talla" ,'like', '%'.$request->nombre.'%' ]);  
         } 
 
         
-        $table = talla::orderBy('nombre')->where($whereClause)->get();
+        $table = talla::orderBy('talla')->where($whereClause)->get();
 
         if(\Auth::user()->roles_id != 1){ 
             return view('talla.NotAllowed', ["table" =>  $table, "filtroNombre" => $request->nombre ]); 
@@ -52,7 +52,7 @@ class tallaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nombre' => 'required|min:5|max:100',
+            'talla' => 'required|min:5|max:100',
             
         ]);
  
@@ -85,7 +85,7 @@ class tallaController extends Controller
     public function edit($id)
     {
         $modelo = talla::find($id);
-        $table = talla::orderBy('nombre')->get()->pluck('nombre','id');
+        $table = talla::orderBy('talla')->get()->pluck('talla','id');
         return view('talla.edit', ["modelo" => $modelo]);
     }
 
@@ -99,7 +99,7 @@ class tallaController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'nombre' => 'required|min:5|max:100',
+            'talla' => 'required|min:5|max:100',
         ]);
 
         $mtalla = talla::find($id);

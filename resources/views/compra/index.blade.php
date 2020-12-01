@@ -45,7 +45,7 @@
                                         @if( \Auth::user()->roles_id!= 1 )
                                         <p class="a">{{$row->id_usuario}}</p>
                                         @else 
-                                        <a href="{{route('compra.show', $row->id)}}" class="a">{{$row->id_usuario}} <span class="oi oi-eye"></span></a>
+                                        <a href="{{route('compra.show', $row->id)}}" class="a">{{$row->getUser->name}} <span class="oi oi-eye"></span></a>
                                         @endif 
                                     </div>
                                 </div>               

@@ -41,7 +41,7 @@
                                 @if( \Auth::user()->roles_id!= 1 )
                                 <p class="a">{{$row->nombre}}</p>
                                 @else 
-                                <a href="{{route('talla.show', $row->id)}}" class="a">{{$row->nombre}} <span class="oi oi-eye"></span></a>
+                                <a href="{{route('talla.show', $row->id)}}" class="a">{{$row->talla}} <span class="oi oi-eye"></span></a>
                                 @endif
                             </td>
                         </tr>

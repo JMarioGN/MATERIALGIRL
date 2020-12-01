@@ -18,7 +18,9 @@ class ProductoController extends Controller
         array_push($carrito, [ 
         'idProducto' => $request->idProducto,  'cantidad' => $request->cantidad  
         ] ); 
-        $request->session()->put('carrito', $carrito); echo var_dump($carrito); 
+        $request->session()->put('carrito', $carrito); echo var_dump($carrito);
+
+        
     } 
 
     public function index(Request $request){
@@ -31,11 +33,14 @@ class ProductoController extends Controller
         ->where($whereClause)
         ->get();
 
-        if(\Auth::user()->roles_id != 1){ 
-            return view('productos.NotAllowed', ["tableProductos" =>  $tableProductos, "filtroNombre" => $request->nombre ]); 
-        } 
+        
 
-        return view('productos.index', ["tableProductos" =>  $tableProductos, "filtroNombre" => $request->nombre ]);
+        if(\Auth::user()->roles_id == 1){
+            return view('productos.index', ["tableProductos" =>  $tableProductos, "filtroNombre" => $request->nombre ]);
+        }else{
+            return view('productos.indexClientes', ["tableProductos" =>  $tableProductos, "filtroNombre" => $request->nombre ]);
+        }
+        
     }
 
     public function create()

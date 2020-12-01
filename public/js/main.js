@@ -315,9 +315,6 @@
 	};
 
 	
-
-
-	
 	$(function(){
 		parallax();
 		mobileMenuOutsideClick();
@@ -332,5 +329,6 @@
 		loaderPage();
 	});
 
+	
 
 }());

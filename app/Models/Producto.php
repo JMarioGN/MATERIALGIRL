@@ -19,4 +19,10 @@ class Producto extends Model
         return $this->belongsTo('App\Models\cProducto','cproducto_id','id');
     }
 
+    public function getProducto()
+    {
+                            // Modelo de referencia, campo local, campo foráneo 
+        return $this->belongsTo('App\Models\Producto','id_producto','id');
+    }
+
 }

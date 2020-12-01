@@ -8,14 +8,21 @@ class CreateCompra extends Migration
     {
         Schema::create('compra', function (Blueprint $table) {
             $table->id();
-            $table->decimal('total',13,2)->default(0);
-            $table->unsignedBigInteger('id_detalle_compra');
-            $table->unsignedBigInteger('id_proveedor');
-            $table->unsignedBigInteger('id_usuario');
+            $table->integer('no_pedido');
+            $table->decimal('costo_pieza',13,2)->default(0);
+            $table->string('color',100);
+            $table->date('fecha_compra');
+            $table->string('marca',100);
+            $table->string('modelo',100);
+            $table->integer('cantidad');
 
+            $table->unsignedBigInteger('id_producto');
+            $table->unsignedBigInteger('id_talla');
+            $table->unsignedBigInteger('id_detalle_compra');
+
+            $table->foreign('id_producto')->references('id')->on('producto');
+            $table->foreign('id_talla')->references('id')->on('talla');
             $table->foreign('id_detalle_compra')->references('id')->on('detalle_compra');
-            $table->foreign('id_proveedor')->references('id')->on('proveedores');
-            $table->foreign('id_usuario')->references('id')->on('users');
             $table->timestamps();
         });
     }

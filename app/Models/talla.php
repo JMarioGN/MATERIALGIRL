@@ -9,5 +9,5 @@ class talla extends Model
 {
     use HasFactory;
     protected $table = 'talla';
-    protected $fillable = ['nombre'];
+    protected $fillable = ['talla'];
 }

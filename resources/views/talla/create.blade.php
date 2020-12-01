@@ -19,8 +19,8 @@
 
 		<div class="row divf">
 			<div class="form-group col-md-12">
-		        {{ Form::label('nombre', 'Nombre de la talla') }}
-		        {{ Form::text('nombre', Request::old('nombre'),
+		        {{ Form::label('talla', 'Nombre de la talla') }}
+		        {{ Form::text('talla', Request::old('talla'),
 		           array('class' => 'form-control ci', 'required'=>true, 'maxlength'=> 30, 'minlength'=> 5)) }}
 		    </div>
 		</div>

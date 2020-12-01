@@ -51,7 +51,7 @@ class proveedoresController extends Controller
     {
         $validatedData = $request->validate([
             'nombre' => 'required|min:4|max:100',
-            'telefono' => 'required|min:1|max:10',
+            'telefono' => 'required|min:1|max:11',
             'direccion' => 'required|min:10|max:200',
         ]);
  

@@ -15,7 +15,7 @@ class CreateTalla extends Migration
     {
         Schema::create('talla', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('talla');
             $table->timestamps();
         });
     }

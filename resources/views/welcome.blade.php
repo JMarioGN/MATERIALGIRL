@@ -37,11 +37,15 @@
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/flexslider.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- CSS diseño -->
+    <link href="{{ asset('css/f.css') }}" rel="stylesheet">
     <!-- ICONOS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
     <script src="js/modernizr-2.6.2.min.js"></script>
-    
-
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-theme.css">
     </head>
     <body>
         
@@ -102,7 +106,9 @@
                         </div>
                         <div class="gtco-copy">
                             <h3>Misión:</h3>
-                            <p>Ser una empresa dedicada a la implementación de redes ayudando a nuestros clientes a alcanzar sus metas de negocios previendo nuestros servicios a través de nuestros conocimientos.  Para ello implementamos soluciones prácticas adaptadas a sus necesidades y desarrollamos nuevas soluciones creativas.</p>
+                            <p>
+                                Sorprender a nuestros Clientes y a nuestros ‘Stakeholders’ al ser una fuerza positiva con lo que hacemos y en la forma en que lo hacemos, además de proporcionar ropa de calidad al mejor precio.  
+                            </p>
                         </div>
                     </div>
 
@@ -112,11 +118,13 @@
                         </div>
                         <div class="gtco-copy">
                             <h3>Valores:</h3>
-                            <p>• Integridad y Respeto: genera e inspira confianza con su trabajo y en su persona.<br>
-                            • Sentido de Responsabilidad: es comprometido. Mide, reconoce y se hace cargo de sus acciones.<br>
-                            • Enfoque al Cliente: siempre en busca de mejorar la propuesta de valor y experiencia de nuestros clientes.<br>
-                            • Compromiso a la Excelencia: enfoque en mejora continua para alcanzar la excelencia y generar valor.<br>
-                            • Espíritu Innovador: cuestionan constantemente el status quo para transformar positivamente nuestro modelo de negocio.</p>
+                            <p>
+                                •   Integridad: Hacemos negocios siempre de forma ética, respetando la dignidad humana y actuando con rectitud y transparencia. <br>
+                                •   Compromiso: Nos comprometemos con nuestro trabajo, con las personas y las comunidades en donde trabajamos.  <br>
+                                •   Colaboración: Trabajamos juntos para innovar, compartiendo conocimientos y retándonos para crecer.  <br>
+                                •   Claridad: Decimos lo que pensamos de manera asertiva y establecemos objetivos claros que comunicamos abiertamente.  <br>
+                                •   Resultados y Reconocimiento: Enfocamos nuestro trabajo al logro de resultados de alto impacto que sumen al cumplimiento de nuestra Misión.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -128,7 +136,9 @@
                         </div>
                         <div class="gtco-copy">
                             <h3>Visión:</h3>    
-                            <p>Ser una empresa reconocida a nivel nacional de tal forma que seamos los líderes en la infraestructura de las TIC. Queremos estar comprometidos con los problemas de nuestros clientes de forma transparente y eficaz para convertirnos en su socio de confianza.</p> 
+                            <p>
+                                Ser una empresa líder y reconocida en la venta de ropa, lograr también extendernos y crear nuestras cadenas de almacenes, proporcionando cada día más un servicio de excelencia a nuestros clientes. 
+                            </p> 
                         </div>
                     </div>
 
@@ -157,45 +167,52 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-      <img src="images/anuncio1.png" alt="Los Angeles">
+      <a href="{{route('cataPro.index')}}"><img src="images/anuncio1.png" alt="Los Angeles"></a>
     </div>
 
     <div class="item">
-      <img src="images/anuncio2.png" alt="Chicago">
+      <a href="{{route('cataPro.index')}}"><img src="images/anuncio2.png" alt="Chicago"></a>
     </div>
 
     <div class="item">
-      <img src="images/anuncio3.png" alt="New York">
+      <a href="{{route('cataPro.index')}}"><img src="images/anuncio3.png" alt="New York"></a>
     </div>
   </div>
 
   <!-- Left and right controls -->
-  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-    <span class="oi oi-chevron-left"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" data-slide="next">
-    <span class="oi oi-chevron-right"></span>
-    <span class="sr-only">Next</span>
-  </a>
+  
 </div>
-<br><br>
+   <br>
+   <br>
+   <br>
    
-   <div class="d-flex justify-content-center">
-    <div class="d-flex justify-content-center">
-        @foreach($tableProductos as $rowProducto)
-            <img class="d-block w-100" src="{{ asset('storage/'.$rowProducto->imgNombreFisico )}}" alt="First slide" style="width: 90%; max-width: 190px; height: 150px; border-radius: 4px;">      
-        @endforeach
-    </div>
     
-        <br>
-        <div class="d-flex justify-content-center">
-            @foreach($tableProductos as $rowProducto)
-                <a href="{{route('productos.index', $rowProducto->id)}}" class="a">{{$rowProducto->nombre}}</a>
+    
+
+    <div style="display: flex; flex-direction: column; justify-content: center; padding: 20px;">
+        <div style="display: flex; justify-content: space-around; padding: 4px; width: 90%;">
+             @foreach($consultaC as $row)
+            <h3>{{$row->nombre}}</h3>
+            @endforeach
+        </div>
+        <div style="display: flex; justify-content: space-around; padding: 4px; width: 90%;">
+            @foreach($consultaC as $row)
+        <a href="{{route('cataPro.show', $row->id)}}"><img src="{{ asset('storage/'.$row->imgNombreFisico )}}" class="d-block w-100" style="width: 230px; height: 320px; border-radius: 6px;"></a>
+        @endforeach
+        </div>
+        <div style="display: flex; justify-content: space-around; padding: 4px; width: 90%;">
+            @foreach($consultaC as $row)
+            <h3 >${{$row->costo_pieza*1.30}}</h3>
             @endforeach
         </div>
     </div>
-
+    <div style="clear: both; padding: 20px; display: flex; justify-content: center;">
+        <div>
+            <a href="{{route('cataPro.index')}}" class="btn btn-primary pull-left" style="width: 300px;"><span class="oi oi-tag"></span> Ver más</a>
+        </div>
+    </div>
+   
+   
 </section>             
 
 
@@ -259,6 +276,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.easing.1.3.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script> <!-- BOOTSTRAP NO LO TENIA -->
     <script src="js/jquery.waypoints.min.js"></script>
     <script src="js/jquery.stellar.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
