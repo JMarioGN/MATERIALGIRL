@@ -18,6 +18,7 @@ El id es el {{\Auth::user()->id}}
 @if( \Auth::user()->roles_id== 1 ) 
                 <a href="{{route('users.create')}}" class=" btn btn-primary btr"><span class="oi oi-plus"></span></a>
                 <b>Nuevo usuario</b> <br> <br>
+                <a href="{{route('excel')}}" class="btn btn-primary"><span class="oi oi-document"></span> Reporte de usuarios</a> <br><br>
            
     @else 
     No tienes permisos de registrar usuarios 

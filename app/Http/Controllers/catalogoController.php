@@ -20,14 +20,45 @@ class catalogoController extends Controller
     public function index()
     {
         $productos = DB::table('producto')->select('producto.*')
+        ->take(4)
         ->get();
 
         $consultaC = DB::table('compra')
                         ->join('producto', 'compra.id_producto','=','producto.id')
-                        ->select('compra.*','producto.id','producto.nombre','producto.imgNombreFisico','compra.costo_pieza')
+                        ->select('compra.*','producto.nombre','producto.imgNombreFisico','compra.costo_pieza')
+                        ->take(4)
                         ->get();
-
-        return view('cataPro.index', ["productos" =>  $productos, "consultaC" =>  $consultaC]); 
+        $consultaCd = DB::table('compra')
+                        ->join('producto', 'compra.id_producto','=','producto.id')
+                        ->select('compra.*','producto.nombre','producto.imgNombreFisico','compra.costo_pieza')
+                        ->skip(4)
+                        ->take(4)
+                        ->get();
+        $consultaCt = DB::table('compra')
+                        ->join('producto', 'compra.id_producto','=','producto.id')
+                        ->select('compra.*','producto.nombre','producto.imgNombreFisico','compra.costo_pieza')
+                        ->skip(8)
+                        ->take(4)
+                        ->get();
+        $consultaCcu = DB::table('compra')
+                        ->join('producto', 'compra.id_producto','=','producto.id')
+                        ->select('compra.*','producto.nombre','producto.imgNombreFisico','compra.costo_pieza')
+                        ->skip(12)
+                        ->take(4)
+                        ->get();
+        $consultaCci = DB::table('compra')
+                        ->join('producto', 'compra.id_producto','=','producto.id')
+                        ->select('compra.*','producto.nombre','producto.imgNombreFisico','compra.costo_pieza')
+                        ->skip(16)
+                        ->take(4)
+                        ->get();
+        $consultaCs = DB::table('compra')
+                        ->join('producto', 'compra.id_producto','=','producto.id')
+                        ->select('compra.*','producto.nombre','producto.imgNombreFisico','compra.costo_pieza')
+                        ->skip(20)
+                        ->take(4)
+                        ->get();
+        return view('cataPro.index', ["productos" =>  $productos, "consultaC" =>  $consultaC, "consultaCd" =>  $consultaCd, "consultaCt" =>  $consultaCt, "consultaCcu" =>  $consultaCcu, "consultaCci" =>  $consultaCci, "consultaCs" =>  $consultaCs]); 
     }
 
     /*

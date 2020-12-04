@@ -17,10 +17,8 @@ class CreateDetalleCompra extends Migration
             $table->id();
             $table->string('detalle',100);
             $table->unsignedBigInteger('id_usuario');
-            $table->unsignedBigInteger('id_proveedor');
-
+            
             $table->foreign('id_usuario')->references('id')->on('users');
-            $table->foreign('id_proveedor')->references('id')->on('proveedores');
             $table->timestamps();
         });
     }

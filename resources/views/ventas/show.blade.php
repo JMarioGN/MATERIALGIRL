@@ -37,8 +37,8 @@
                 <tr>
                     <td>{{$row->nombre}}</td>
                     <td><img src="{{ asset('storage/'.$row->imgNombreFisico )}}" class="img1" ></td>
-                    <td>${{$row->cantidad}}</td>
-                    <td>{{$row->precio_venta}}</td>
+                    <td>{{$row->cantidad}}</td>
+                    <td>$ {{$row->precio_venta}}</td>
                 </tr>
                 
             @endforeach

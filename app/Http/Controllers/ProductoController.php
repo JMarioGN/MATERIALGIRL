@@ -59,8 +59,8 @@ class ProductoController extends Controller
         // De forma automática regresa a la pantalla de origen creando una variable llamada $errors
         // la cual contiene las validaciones realizadas
         $validatedData = $request->validate([
-            'nombre' => 'required|min:20|max:100',
-            'descripcion' => 'required|min:50|max:200',
+            'nombre' => 'required|min:8|max:100',
+            'descripcion' => 'required|min:15|max:200',
             'cproducto_id' => 'required|exists:cproducto,id'
         ]);
  
@@ -103,8 +103,8 @@ class ProductoController extends Controller
     public function update($id, Request $request)
     {
         $validatedData = $request->validate([
-            'nombre' => 'required|min:20|max:100',
-            'descripcion' => 'required|min:50|max:200',
+            'nombre' => 'required|min:8|max:100',
+            'descripcion' => 'required|min:15|max:200',
             'cproducto_id' => 'required|exists:cproducto,id'
         ]);
 

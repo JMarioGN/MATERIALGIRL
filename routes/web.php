@@ -98,8 +98,28 @@ Route::group(['middleware' => ['auth'] ], function(){
 
     //Route::get('cart/create', 'cartController@create')->name('cataPro.create'); 
     
+    //mis compras
+    Route::get('cataPro.misCompras', 'cartController@mc')->name('misCompras');
+    Route::get('cataPro.items', 'cartController@items')->name('items');
+    Route::get('cataPro.misDatos/{id}', 'cartController@edit')->name('misDatos');
+    Route::get('cataPro.misDatos/{id}', 'cartController@edit')->name('misDatos');
+    Route::post('/misDatos/actualiza/{id}/{request?}',array(
+        'as' => 'misDatos-actualiza',
+        'uses' => 'cartController@actualiza',
+    )); 
+    // reporte de compras lo imprime el cliente
+    Route::get('/ex/{id}', 'cartController@excel')->name('ex'); 
 
-    
+    // reporte de compras 
+    Route::get('/c/{id}', 'detalle_compraController@excel')->name('c'); 
+    // reporte de ventas
+    Route::get('/v/{id}', 'ventaController@excel')->name('v'); 
+
+
+
+    // exportar a excell
+
+    Route::get('/excel/', 'UserController@excel')->name('excel'); 
 
     Route::post('/agregarCarrito', 'ProductoController@agregarCarrito') ->name('agregarCarrito'); 
     Route::get('/notificaciones', 'UserController@notificaciones')->name('notificaciones'); 

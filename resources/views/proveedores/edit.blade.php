@@ -20,8 +20,8 @@
 
         <div class="row divf">
             <div class="form-group col-md-12">
-                {{ Form::label('nombre', 'Nombre') }}
-                {{ Form::text('nombre', null, 
+                {{ Form::label('proveedor', 'Nombre') }}
+                {{ Form::text('proveedor', null, 
                    array('class' => 'form-control ci', 'style' => 'border:4px solid #00FFCC; border-radius:3px;', 'required'=>true)) }}
             </div>
             <div class="form-group col-md-12">
@@ -39,7 +39,7 @@
         </div>
         <br>
 
-        {{ Form::submit('Actualizar rol', array('class' => 'btn btn-primary bt')) }}
+        {{ Form::submit('Actualizar proveedor', array('class' => 'btn btn-primary bt')) }}
 
         {{ Form::close() }}
     </div>

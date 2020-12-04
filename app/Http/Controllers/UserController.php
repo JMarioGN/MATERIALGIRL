@@ -7,6 +7,11 @@ Use Redirect;
 use Illuminate\Http\Request;
 use App\Models\UserEloquent;
 use App\Models\roles;
+use Illuminate\Support\Facades\DB;
+
+use Maatwebsite\Excel\Concerns\FromCollection; 
+use App\Exports\DataExcelExport; 
+
 
 
 class UserController extends Controller
@@ -15,6 +20,34 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function excel() 
+    { 
+        $usuarios = DB::table('users')
+                        ->join('roles', 'users.roles_id','=','roles.id')
+                        ->select('users.*', 'roles.nombre')
+                        ->get();
+
+        $areglo=[ ['MATERIALGIRL'],
+                ['Reporte de usuarios'],
+                ['Nombre:', 'Correo:', 'Fecha registro:', 'Rol:'],];
+        foreach ($usuarios as $u) {
+            array_push($areglo, [$u->name, $u->email, $u->created_at, $u->nombre]);
+          /* $datos = new DataExcelExport([ 
+                ['MATERIALGIRL'],
+                ['Reporte de usuarios'],
+                ['Nombre:', 'Correo:', 'Fecha registro:', 'Rol:'], 
+                [$u->name, $u->email, $u->created_at, $u->nombre] 
+            ]); */
+        }
+
+        $datos = new DataExcelExport($areglo);
+                
+
+        //return $usuarios;
+        return \Excel::download( $datos, 'usuarios.xlsx'); 
+    } 
+
 
     public function notificaciones() 
     { 

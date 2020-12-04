@@ -29,11 +29,6 @@
                 {{ Form::select('id_usuario', $comboUsuario, Request::old('id_usuario'),  
                    array('class' => 'form-control ci')) }}
             </div>
-            <div class="form-group col-md-12">
-                {{ Form::label('id_proveedor', 'Nombre del proveedor') }}
-                {{ Form::select('id_proveedor', $comboProveedor, Request::old('id_proveedor'),  
-                   array('class' => 'form-control ci')) }}
-            </div>
     	</div>
 		<br>
     	{{ Form::submit('Registrar detalle de compra', ['class' => 'btn btn-primary bt'] ) }}

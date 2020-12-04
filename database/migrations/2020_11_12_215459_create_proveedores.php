@@ -10,7 +10,7 @@ class CreateProveedores extends Migration
     {
         Schema::create('proveedores', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',100);
+            $table->string('proveedor',100);
             $table->string('direccion', 100);
             $table->integer('telefono');
             $table->timestamps();

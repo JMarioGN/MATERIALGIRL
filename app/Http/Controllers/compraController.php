@@ -11,6 +11,7 @@ use App\Models\detalle_compra;
 use App\Models\Producto;
 use App\Models\talla;
 use App\Models\compra;
+use App\Models\proveedores;
 
 class compraController extends Controller
 {
@@ -47,8 +48,9 @@ class compraController extends Controller
         $comboProducto = Producto::orderBy('nombre')->get()->pluck('nombre','id');
         $comboTalla = talla::orderBy('talla')->get()->pluck('talla','id');
         $comboDetalle = detalle_compra::orderBy('detalle')->get()->pluck('detalle','id');
+        $comboProveedor = proveedores::orderBy('proveedor')->get()->pluck('proveedor','id');
 
-        return view('compra.create',[ 'comboProducto' => $comboProducto, 'comboTalla' => $comboTalla, 'comboDetalle' => $comboDetalle ]);
+        return view('compra.create',[ 'comboProducto' => $comboProducto, 'comboTalla' => $comboTalla, 'comboDetalle' => $comboDetalle, 'comboProveedor' => $comboProveedor ]);
     }
 
     /**
@@ -60,15 +62,16 @@ class compraController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'no_pedido' => 'required|min:1|max:6',
-            'costo_pieza' => 'required|min:1|max:7',
+            'no_pedido' => 'required|numeric|min:1|max:9999999999',
+            'costo_pieza' => 'required|numeric|min:1|max:9999999999',
             'color' => 'required|min:1|max:20',
             'fecha_compra' => 'required',
             'marca' => 'required|min:1|max:20',
-            'modelo' => 'required|min:1|max:20',
-            'cantidad' => 'required|min:1|max:7',
+            'modelo' => 'required|numeric|min:1|max:9999999999',
+            'cantidad' => 'required|numeric|min:1|max:9999999999',
             'id_producto' => 'required',
             'id_talla' => 'required',
+            'id_proveedor' => 'required',
             'id_detalle_compra' => 'required',
         ]);
  
@@ -105,8 +108,9 @@ class compraController extends Controller
         $comboProducto = Producto::orderBy('nombre')->get()->pluck('nombre','id');
         $comboTalla = talla::orderBy('talla')->get()->pluck('talla','id');
         $comboDetalle = detalle_compra::orderBy('detalle')->get()->pluck('detalle','id');
+        $comboProveedor = proveedores::orderBy('proveedor')->get()->pluck('proveedor','id');
 
-        return view('compra.edit',[ "modelo" => $modelo, 'comboProducto' => $comboProducto, 'comboTalla' => $comboTalla, 'comboDetalle' => $comboDetalle]);
+        return view('compra.edit',[ "modelo" => $modelo, 'comboProducto' => $comboProducto, 'comboTalla' => $comboTalla, 'comboDetalle' => $comboDetalle, 'comboProveedor' => $comboProveedor]);
     }
 
     /**
@@ -119,13 +123,13 @@ class compraController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'no_pedido' => 'required|min:1|max:6',
-            'costo_pieza' => 'required|min:1|max:7',
+            'no_pedido' => 'required|numeric|min:1|max:9999999999',
+            'costo_pieza' => 'required|numeric|min:1|max:9999999999',
             'color' => 'required|min:1|max:20',
             'fecha_compra' => 'required',
             'marca' => 'required|min:1|max:20',
-            'modelo' => 'required|min:1|max:20',
-            'cantidad' => 'required|min:1|max:7',
+            'modelo' => 'required|numeric|min:1|max:9999999999',
+            'cantidad' => 'required|numeric|min:1|max:9999999999',
             'id_producto' => 'required',
             'id_talla' => 'required',
             'id_detalle_compra' => 'required',

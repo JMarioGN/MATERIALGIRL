@@ -45,7 +45,7 @@ class detalle_ventaController extends Controller
             'nombre' => 'required|min:5|max:100',
             'ap' => 'required|min:5|max:100',
             'am' => 'required|min:5|max:100',
-            'telefono' => 'required|min:1|max:10',
+            'telefono' => 'required|numeric|min:1|max:9999999999',
             'direccion' => 'required|min:10|max:200',
             //'id_usuario'=>'required|exists:users,id'
             //'id_producto'=>'required|exists:producto,id'
@@ -102,7 +102,7 @@ class detalle_ventaController extends Controller
             'nombre' => 'required|min:5|max:100',
             'ap' => 'required|min:5|max:100',
             'am' => 'required|min:5|max:100',
-            'telefono' => 'required|min:1|max:10',
+            'telefono' => 'required|numeric|min:1|max:9999999999',
             'direccion' => 'required|min:10|max:200',
             //'id_usuario'=>'required|exists:users,id'
             //'id_producto'=>'required|exists:producto,id'

@@ -19,10 +19,10 @@ class proveedoresController extends Controller
     {
         $whereClause = []; 
         if($request->nombre){ 
-            array_push($whereClause, [ "nombre" ,'like', '%'.$request->nombre.'%' ]);  
+            array_push($whereClause, [ "proveedor" ,'like', '%'.$request->nombre.'%' ]);  
         } 
 
-        $table = proveedores::orderBy('nombre')->where($whereClause)->get();
+        $table = proveedores::orderBy('proveedor')->where($whereClause)->get();
 
         if(\Auth::user()->roles_id != 1){ 
             return view('proveedores.NotAllowed', ["table" =>  $table, "filtroNombre" => $request->nombre ]); 
@@ -50,8 +50,8 @@ class proveedoresController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nombre' => 'required|min:4|max:100',
-            'telefono' => 'required|min:1|max:11',
+            'proveedor' => 'required|min:3|max:100',
+            'telefono' => 'required|numeric|min:1|max:9999999999',
             'direccion' => 'required|min:10|max:200',
         ]);
  
@@ -84,7 +84,7 @@ class proveedoresController extends Controller
     public function edit($id)
     {
         $modelo = proveedores::find($id);
-        $table = proveedores::orderBy('nombre')->get()->pluck('nombre','id');
+        $table = proveedores::orderBy('proveedor')->get()->pluck('proveedor','id');
         return view('proveedores.edit', ["modelo" => $modelo]);
     }
 
@@ -98,8 +98,8 @@ class proveedoresController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'nombre' => 'required|min:4|max:100',
-            'telefono' => 'required|min:1|max:10',
+            'proveedor' => 'required|min:3|max:100',
+            'telefono' => 'required|numeric|min:1|max:9999999999',
             'direccion' => 'required|min:10|max:200',
         ]);
 
@@ -108,7 +108,7 @@ class proveedoresController extends Controller
 
         $mproveedores->save();
 
-        Session::flash('message', 'Rol actualizado!');
+        Session::flash('message', 'Proveedor actualizado!');
         return Redirect::to('proveedores');
     }
 
@@ -122,7 +122,7 @@ class proveedoresController extends Controller
     {
         $mroles = proveedores::find($id);
         $mroles->delete();
-        Session::flash('message', 'Rol eliminado!');
+        Session::flash('message', 'Proveedor eliminado!');
         return Redirect::to('proveedores');
     }
 }

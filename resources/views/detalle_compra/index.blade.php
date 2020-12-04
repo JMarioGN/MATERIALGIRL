@@ -8,7 +8,7 @@
 
 @if( \Auth::user()->roles_id== 1 ) 
     <a href="{{route('detalle_compra.create')}}" class=" btn btn-primary btr"><span class="oi oi-plus"></span></a>
-    <b>Nuevo detalle de compra</b> <br> <br>
+    <b>Nuevo Pedido</b> <br> <br>
     @else 
     No tienes permisos de registrar detalle de compra 
     @endif 
@@ -33,7 +33,8 @@
             <table class="table table-striped table-default">
                 <thead class="thead">
                     <tr class="tr">
-                        <th>Detalle:</th>
+                        <th>Pedidos:</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +46,9 @@
                                         <a href="{{route('detalle_compra.show', $row->id)}}" class="a">{{$row->detalle}} <span class="oi oi-eye"></span></a>
                                     </div>
                                 </div>               
+                            </td>
+                            <td>
+                                <a href="{{route('c', $row->id)}}" class="btn btn-primary"><span class="oi oi-document"></span> Reporte </a>
                             </td>
                         </tr>
                     @endforeach

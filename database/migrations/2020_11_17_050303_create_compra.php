@@ -13,15 +13,17 @@ class CreateCompra extends Migration
             $table->string('color',100);
             $table->date('fecha_compra');
             $table->string('marca',100);
-            $table->string('modelo',100);
+            $table->integer('modelo');
             $table->integer('cantidad');
 
             $table->unsignedBigInteger('id_producto');
             $table->unsignedBigInteger('id_talla');
+            $table->unsignedBigInteger('id_proveedor');
             $table->unsignedBigInteger('id_detalle_compra');
 
             $table->foreign('id_producto')->references('id')->on('producto');
             $table->foreign('id_talla')->references('id')->on('talla');
+            $table->foreign('id_proveedor')->references('id')->on('proveedores');
             $table->foreign('id_detalle_compra')->references('id')->on('detalle_compra');
             $table->timestamps();
         });

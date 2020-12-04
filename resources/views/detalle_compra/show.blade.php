@@ -37,24 +37,18 @@
                     <td>Costo:</td> 
                     <td>Marca:</td> 
                     <td>Modelo:</td> 
-                    <td>Talla:</td> 
-                    <td></td>
+                    <td>Talla:</td>
+                    <td>Proveedor:</td>
                 </tr>
                 <tr>
-                    <p>{{$row->id}}</p>
                     <td><img src="{{ asset('storage/'.$row->imgNombreFisico )}}" class="img1"></td>
-                    <td><a href="{{route('compra.edit', $row->id)}}">{{$row->nombre}}</a></td>
+                    <td>{{$row->nombre}}</td>
                     <td>{{$row->cantidad}}</td>
-                    <td>{{$row->costo_pieza}}</td>
+                    <td>$ {{$row->costo_pieza}}</td>
                     <td>{{$row->marca}}</td>
                     <td>{{$row->modelo}}</td>
                     <td>{{$row->talla}}</td>
-                    <td>
-                        {{ Form::open(array('url' => route('compra.destroy', $modelo->id), 'class' => 'pull-right')) }}
-                        {{ Form::hidden('_method', 'DELETE') }}
-                        <button class="btn btn-danger pull-left" onclick="return confirm('¿Eliminar registro?') "><span class="oi oi-x"></span></button>
-                    {{ Form::close() }}
-                    </td>
+                    <td>{{$row->proveedor}}</td>
                 </tr>
                 
             @endforeach

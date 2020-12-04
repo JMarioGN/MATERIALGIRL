@@ -16,4 +16,9 @@ class detalle_compra extends Model
                             // Modelo de referencia, campo local, campo foráneo 
         return $this->belongsTo('App\Models\Producto','id_producto','id');
     }
+    public function getProveedor()
+    {
+                            // Modelo de referencia, campo local, campo foráneo 
+        return $this->belongsTo('App\Models\proveedores','id_proveedor','id');
+    }
 }

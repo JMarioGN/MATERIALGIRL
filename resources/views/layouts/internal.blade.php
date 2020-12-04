@@ -78,7 +78,7 @@
                                     <a class="nav-link" href="{{ route('proveedores.index')  }}" style="color:#333; font:900 14px arial;">Proveedores</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{  route('detalle_compra.index') }}" style="color:#333; font:900 14px arial;">Detalle de compra</a>
+                                    <a class="nav-link" href="{{  route('detalle_compra.index') }}" style="color:#333; font:900 14px arial;">Pedidos</a>
                             </li>
                             <li class="nav-item">
                                     <a class="nav-link" href="{{  route('compra.create') }}" style="color:#333; font:900 14px arial;">Compras</a>
@@ -87,6 +87,12 @@
                                     <a class="nav-link" href="{{  route('ventas.index') }}" style="color:#333; font:900 14px arial;">Ventas</a>
                             </li>
                         @else
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{route('misDatos', \Auth::user()->id)}}" style="color:#333; font:900 14px arial;">Mis datos</a>
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{route('misCompras')}}" style="color:#333; font:900 14px arial;">Mis compras</a>
+                            </li>
                             <li class="nav-item">
                                     <a class="nav-link" href="{{route('cataPro.index')}}" style="color:#333; font:900 14px arial;">Catalogo</a>
                             </li>

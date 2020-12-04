@@ -9,7 +9,7 @@ class compra extends Model
 {
     use HasFactory;
     protected $table = 'compra';
-    protected $fillable = ['no_pedido', 'costo_pieza', 'color', 'fecha_compra', 'marca', 'modelo', 'cantidad', 'id_producto', 'id_talla', 'id_detalle_compra'];
+    protected $fillable = ['no_pedido', 'costo_pieza', 'color', 'fecha_compra', 'marca', 'modelo', 'cantidad', 'id_proveedor', 'id_producto', 'id_talla', 'id_detalle_compra'];
     
     public function getUser()
     {

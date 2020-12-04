@@ -27,6 +27,7 @@
                 <tr><td> Categoría </td> <td>{{$modelo->getcProducto->nombre}}</td></tr>
                 <tr><td> Activo </td> <td> @if($modelo->activo) Sí @else No @endif </td></tr>
                 <tr><td> Venta </td> <td> @if($modelo->venta) Sí @else No @endif </td></tr>
+                 <tr><td> Descripción </td> <td> {{$modelo->descripcion}} </td></tr>
                 <tr><td> Fecha de registro </td> <td>{{$modelo->created_at}}</td></tr>
                 <tr><td> Fecha de modificación </td> <td>{{$modelo->updated_at}}</td></tr>
         </tbody>

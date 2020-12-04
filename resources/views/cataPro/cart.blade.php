@@ -30,7 +30,6 @@
 			<tbody>
 				@foreach($cart as $item)
 				<tr>
-
 					<td><img src="{{ asset('storage/'.$item->getProducto->imgNombreFisico )}}" class="img1"></td>
 					<td>{{$item->getProducto->nombre}}</td>
 					<td>{{number_format($item->costo_pieza*1.30,2)}}</td>

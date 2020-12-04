@@ -8,13 +8,54 @@ use Illuminate\Support\Facades\DB;
 use App\Models\venta;
 use App\Models\detalle_venta;
 
+use Maatwebsite\Excel\Concerns\FromCollection; 
+use App\Exports\DataExcelExport; 
+
 class ventaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function excel($id) 
+    { 
+         $areglo=[ ['MATERIALGIRL'],
+                ['Reporte de ventas'],
+                ['Costo de envío:', 'Total:', 'Fecha de venta:'],];
+
+        $ventas=DB::table('venta')
+                        ->select('venta.*')
+                        ->where('venta.id','=',$id)
+                        ->get();
+
+        $items=DB::table('detalle_venta')
+                        ->join('venta', 'detalle_venta.id_venta','=','venta.id')
+                        ->join('producto', 'detalle_venta.id_producto','=','producto.id')
+                        ->select('producto.nombre','producto.descripcion','detalle_venta.precio_venta', 'detalle_venta.cantidad')
+                        ->where('detalle_venta.id_venta','=',$id)
+                        ->get();
+
+        foreach ($ventas as $v) {
+            array_push($areglo, [$v->costoE,($v->total+$v->costoE), $v->created_at]);
+        }
+
+        array_push($areglo, ['Detalle de productos']);
+        array_push($areglo, ['Nombre del producto:', 'Descripcion:', 'Precio:', 'Cantidad:']);
+
+        foreach ($items as $i) {
+            array_push($areglo, [$i->nombre, $i->descripcion, $i->precio_venta, $i->cantidad]);
+        }
+                        /*
+        foreach ($usuarios as $u) {
+           $datos = new DataExcelExport([ 
+                ['MATERIALGIRL'],
+                ['Reporte de usuarios'],
+                ['Nombre:', 'Correo:', 'Fecha registro:', 'Rol:'], 
+                [$u->name, $u->email, $u->created_at, $u->nombre] 
+            ]); 
+        }
+*/
+        $datos = new DataExcelExport($areglo);
+        //return $areglo;
+        return \Excel::download( $datos, 'reporte_ventas.xlsx'); 
+    } 
+
     public function index(Request $request)
     {
         $whereClause = []; 
@@ -106,4 +147,6 @@ class ventaController extends Controller
     {
         //
     }
+
+
 }

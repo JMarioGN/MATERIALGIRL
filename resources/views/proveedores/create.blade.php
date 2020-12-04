@@ -17,8 +17,8 @@
 		{{ Form::open(array('url' => 'proveedores')) }}
 		<div class="row divf">
 			<div class="form-group col-md-12">
-        		{{ Form::label('nombre', 'Nombre del proveedor') }}
-        		{{ Form::text('nombre', Request::old('nombre'),
+        		{{ Form::label('proveedor', 'Nombre del proveedor') }}
+        		{{ Form::text('proveedor', Request::old('proveedor'),
            array('class' => 'form-control ci', 'style' => 'border:4px solid #00FFCC; border-radius:3px;', 'required'=>true, 'maxlength'=> 30, 'minlength'=> 4)) }}
     		</div>
 

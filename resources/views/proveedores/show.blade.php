@@ -25,7 +25,7 @@
         <tbody>
                 <tr>
                     <td>Nombre del proveedor</td> 
-                    <td>{{$modelo->nombre}}</td> 
+                    <td>{{$modelo->proveedor}}</td> 
                 </tr>
                 <tr>
                     <td>Dirección</td> 

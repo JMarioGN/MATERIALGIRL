@@ -14,13 +14,46 @@ use App\Models\proveedores;
 use App\Models\UserEloquent;
 use App\Models\talla;
 
+use Maatwebsite\Excel\Concerns\FromCollection; 
+use App\Exports\DataExcelExport; 
+
 class detalle_compraController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function excel($id) 
+    { 
+         $areglo=[ ['MATERIALGIRL'],
+                ['Reporte de pedidos'],
+                ['Detalle:', 'Fecha de pedido:'],];
+
+        $pedido=DB::table('detalle_compra')
+                        ->select('detalle_compra.*')
+                        ->where('detalle_compra.id','=',$id)
+                        ->get();
+
+        $detalleItems = DB::table('compra')
+                        ->join('producto', 'compra.id_producto','=','producto.id')
+                        ->join('talla', 'compra.id_talla','=','talla.id')
+                        ->join('proveedores', 'compra.id_proveedor','=','proveedores.id')
+                        ->select('producto.id','producto.imgNombreFisico', 'producto.nombre', 'compra.cantidad','compra.costo_pieza','compra.marca','compra.modelo','talla.talla','compra.id_proveedor','proveedores.proveedor')
+                        ->where('compra.id_detalle_compra', '=', $id)
+                        ->get();
+
+        foreach ($pedido as $p) {
+            array_push($areglo, [$p->detalle, $p->created_at]);
+        }
+
+        array_push($areglo, ['Detalle de productos']);
+        array_push($areglo, ['Nombre del producto:', 'Cantidad:', 'Costo:', 'Marca:', 'Modelo:', 'Talla:', 'Proveedor:']);
+
+        foreach ($detalleItems as $di) {
+            array_push($areglo, [$di->nombre, $di->cantidad, $di->costo_pieza, $di->marca, $di->modelo, $di->talla, $di->proveedor]);
+        }
+
+        $datos = new DataExcelExport($areglo);
+        //return $areglo;
+        return \Excel::download( $datos, 'reporte_pedidos.xlsx'); 
+    } 
+
     public function index(Request $request)
     {
         $whereClause = []; 
@@ -46,7 +79,7 @@ class detalle_compraController extends Controller
      */
     public function create()
     {
-        $comboProveedor = proveedores::orderBy('nombre')->get()->pluck('nombre','id');
+        $comboProveedor = proveedores::orderBy('proveedor')->get()->pluck('proveedor','id');
         $comboUsuario = UserEloquent::orderBy('name')->get()->pluck('name','id');
 
         return view('detalle_compra.create',[ 'comboProveedor' => $comboProveedor, 'comboUsuario' => $comboUsuario ]);
@@ -63,7 +96,6 @@ class detalle_compraController extends Controller
         $validatedData = $request->validate([
             'detalle' => 'required|min:4|max:100',
             'id_usuario' => 'required',
-            'id_proveedor' => 'required',
         ]);
  
         $mdetalle_compra = new detalle_compra($request->all());
@@ -85,7 +117,8 @@ class detalle_compraController extends Controller
         $detalleItems = DB::table('compra')
                         ->join('producto', 'compra.id_producto','=','producto.id')
                         ->join('talla', 'compra.id_talla','=','talla.id')
-                        ->select('producto.id','producto.imgNombreFisico', 'producto.nombre', 'compra.cantidad','compra.costo_pieza','compra.marca','compra.modelo','talla.talla')
+                        ->join('proveedores', 'compra.id_proveedor','=','proveedores.id')
+                        ->select('producto.id','producto.imgNombreFisico', 'producto.nombre', 'compra.cantidad','compra.costo_pieza','compra.marca','compra.modelo','talla.talla','compra.id_proveedor','proveedores.proveedor')
                         ->where('compra.id_detalle_compra', '=', $id)
                         ->get();
         $modelo = detalle_compra::find($id);
@@ -103,7 +136,7 @@ class detalle_compraController extends Controller
      */
     public function edit($id)
     {
-        $comboProveedor = proveedores::orderBy('nombre')->get()->pluck('nombre','id');
+        $comboProveedor = proveedores::orderBy('proveedor')->get()->pluck('proveedor','id');
         $comboUsuario = UserEloquent::orderBy('name')->get()->pluck('name','id');
         $modelo = detalle_compra::find($id);
         
@@ -115,7 +148,6 @@ class detalle_compraController extends Controller
         $validatedData = $request->validate([
             'detalle' => 'required|min:4|max:100',
             'id_usuario' => 'required',
-            'id_proveedor' => 'required',
         ]);
  
         $mdetalle_compra = detalle_compra::find($id);

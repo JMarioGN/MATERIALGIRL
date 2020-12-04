@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\DB;
 
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
@@ -21,6 +22,8 @@ use PayPal\Api\Transaction;
 
 use App\Models\detalle_venta;
 use App\Models\venta;
+use App\Models\compra;
+
 
 class PaypalController extends BaseController
 {
@@ -44,7 +47,9 @@ class PaypalController extends BaseController
         $cart = \Session::get('cart');
         $currency = 'MXN';
 
-        foreach($cart as $producto){
+
+
+        foreach($cart as $producto){ 
             $item = new Item();
             $item->setName($producto->name)
             ->setCurrency($currency)
@@ -160,8 +165,14 @@ class PaypalController extends BaseController
         $cart = \Session::get('cart');
         $shipping = 100;
 
+        
+
         foreach($cart as $producto){
             $subtotal += $producto->cantidad * $producto->costo_pieza*1.30;
+
+            
+
+
         }
 
         $venta = venta::create([
@@ -173,6 +184,7 @@ class PaypalController extends BaseController
         foreach($cart as $producto){
             $this->saveOrderItem($producto, $venta->id);
         }
+
     }
 
     protected function saveOrderItem($producto, $id_venta)
@@ -180,8 +192,23 @@ class PaypalController extends BaseController
         detalle_venta::create([
             'precio_venta' => $producto->costo_pieza*1.30,
             'cantidad' => $producto->cantidad,
-            'id_producto' => $producto->id,
+            'id_producto' => $producto->id_producto,
             'id_venta' => $id_venta
         ]);
+
+        $cp=DB::table('compra')
+               ->select('compra.cantidad')
+               ->where('compra.id_producto', '=', $producto->id_producto)
+                ->get();
+
+        foreach ($cp as $cc) {
+            $cc->cantidad=$cc->cantidad-$producto->cantidad;
+
+            DB::table('compra')->where('compra.id_producto', '=', $producto->id_producto)->update(['compra.cantidad' => $cc->cantidad]);
+
+        }
+        
+        
+       
     }
 }

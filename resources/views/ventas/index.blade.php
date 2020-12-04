@@ -23,7 +23,7 @@
         <div class="form-group col-md-3"> 
             <form class="divf"> 
                 <label for="nombre">Filtrar por nombre</label> 
-                <input type="text" name="nombre" value="{{$filtroNombre}}" class="form-control ci" style="background: #BB8FCE;"><br>
+                <input type="text" name="nombre" value="{{$filtroNombre}}" class="form-control ci"><br>
                 <button class="btn btn-primary bt">
                     <span class="oi oi-magnifying-glass" ></span> Buscar
                 </button>
@@ -36,6 +36,7 @@
                         <th></th>
                         <th>Ventas</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,13 +45,17 @@
                             <td>Usuario:</td>
                             <td>Costo de envio:</td>
                             <td>Total:</td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>
                                 <a href="{{route('ventas.show', $row->id)}}" class="a">{{$row->getUser->name}} <span class="oi oi-eye"></span></a>             
                             </td>
-                            <td>{{$row->costoE}}</td>
-                            <td>{{$row->total}}</td>
+                            <td>$ {{$row->costoE}}</td>
+                            <td>$ {{($row->costoE + $row->total)}}</td>
+                            <td>
+                                <a href="{{route('v', $row->id)}}" class="btn btn-primary"><span class="oi oi-document"></span> Reporte </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
